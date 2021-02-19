@@ -1,5 +1,8 @@
 function getEmailList() {
     const url = "https://script.google.com/macros/s/AKfycbw7LsL3ASCbX82jmKa0K1_P66Lz8mBTqh5LLJbpxktF4GR4shm8qBLYig/exec";
+    const msg = document.getElementById('msg');
+    msg.innerHTML = "Please wait ...";
+
     fetch(url)
         .then(d => d.json())
         .then(d => {
@@ -12,6 +15,8 @@ function showList(arr) {
     arr.forEach(el => {
         table.insertRow(-1).insertCell(0).innerHTML = el.email;
     });
+    const msg = document.getElementById('msg');
+    msg.innerHTML = "";   
 }
 
 function addRow() {
