@@ -49,5 +49,5 @@ function copyToClipboard() {
     document.execCommand('copy');
 }
 
-document.getElementById("btn").addEventListener("click", getEmailList);
-document.getElementById("copyBtn").addEventListener("click", copyToClipboard);
+document.getElementById("btnGetEmails").addEventListener("click", getEmailList);
+document.getElementById("btnCopy").addEventListener("click", copyToClipboard);
