@@ -30,9 +30,7 @@
             width: 20%;
         }
 
-        .content {
-
-        }
+        .content {}
     </style>
 </head>
 
@@ -40,7 +38,7 @@
     <div id="container">
         <div class="mt-2 ml-2">
             <button id="btnGetEmails" class="btn btn-primary">Get Emails</button>
-            <span id="msg"></span>   
+            <span id="msg"></span>
         </div>
         <!-- <button id="copyBtn">Copy to Clipboard</button> -->
         <div class="bd-clipboard">
@@ -48,7 +46,13 @@
                 data-original-title="Copy to clipboard">Copy</button>
         </div>
         <div class="content mt-2">
-            <table id="emailTable" class="table table-striped"></table>
+            <table id="emailTable" class="table table-striped">
+                <thead>
+                    <td>
+
+                    </td>
+                </thead>
+            </table>
         </div>
     </div>
     <script src="app.js"></script>
