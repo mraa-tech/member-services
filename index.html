@@ -8,26 +8,44 @@
     <title>Google Sheets API Test</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+        .btn-clipboard {
+            position: absolute;
+            top: .65rem;
+            right: .65rem;
+            z-index: 10;
+            display: block;
+            padding: .25rem .5rem;
+            font-size: 65%;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid;
+            border-radius: .25rem;
+        }
+    </style>
 </head>
 
 <body>
     <div>
         <button id="btnGetEmails" class="btn btn-primary">Get Emails</button>
+        <div id="msg"></div>
+
     </div>
 
     <!-- <button id="copyBtn">Copy to Clipboard</button> -->
-    <div id="msg"></div>
+
     <div class="bd-clipboard">
-        <button id="btnCopy" type="button" class="btn btn-clipboard" title="Copy to clipboard" data-toggle="tooltip" data-original-title="Copy to clipboard">Copy</button>
-        <table id="emailTable"></table>
+        <button id="btnCopy" type="button" class="btn btn-clipboard" title="Copy to clipboard" data-toggle="tooltip"
+            data-original-title="Copy to clipboard">Copy</button>
+        <table id="emailTable" class="table table-striped"></table>
     </div>
     <script src="app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" 
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
