@@ -21,7 +21,7 @@ function showList(arr) {
         row.insertCell(0).innerHTML = el.email;
         row.insertCell(0).innerHTML = el.firstname;
         row.insertCell(0).innerHTML = el.lastname;
-        //table.insertRow(-1).insertCell(0).innerHTML = el.email;
+        row.insertCell(0).innerHTML = el.status;
     });
 
     msg.innerHTML = "";  
