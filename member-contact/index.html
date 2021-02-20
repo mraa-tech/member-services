@@ -38,6 +38,20 @@
 
 <body>
     <div class="container mraa-container pt-3">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+            <a class="navbar-brand" href="#">MRAA Tech</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="..">Home <span class="sr-only">(current)</span></a>
+                </div>
+            </div>
+        </nav>
+
         <h1>Active Member Email List</h1>
         <div class="mt-2 ml-2">
             <button id="btnGetEmails" class="btn btn-primary">Get Emails</button>
@@ -47,8 +61,8 @@
             <table id="emailTable" class="table table-striped">
                 <tr>
                     <td>
-                        <button id="btnCopy" type="button" class="btn btn-secondary" title="Copy to clipboard" data-toggle="tooltip"
-                        data-original-title="Copy to clipboard" disabled>Copy</button>
+                        <button id="btnCopy" type="button" class="btn btn-secondary" title="Copy to clipboard"
+                            data-toggle="tooltip" data-original-title="Copy to clipboard" disabled>Copy</button>
                     </td>
                 </tr>
             </table>
@@ -62,7 +76,7 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
     </script>
     <script>
-        $(function() {
+        $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
