@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Google Sheets API Test</title>
+    <title>MRAA Member Services - Email List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
@@ -30,28 +30,27 @@
             width: 20%;
         }
 
-        .content {}
+        .content {
+            flex: 1 0 auto;
+        }
     </style>
 </head>
 
 <body>
-    <div id="container">
+    <div class="container mraa-container pt-3">
+        <h1>Active Member Email List</h1>
         <div class="mt-2 ml-2">
             <button id="btnGetEmails" class="btn btn-primary">Get Emails</button>
             <span id="msg"></span>
         </div>
-        <!-- <button id="copyBtn">Copy to Clipboard</button> -->
-<!--         <div class="bd-clipboard">
-
-        </div> -->
         <div class="content mt-2">
             <table id="emailTable" class="table table-striped">
-                <thead>
+                <tr>
                     <td>
-                        <button id="btnCopy" type="button" class="btn btn-clipboard" title="Copy to clipboard" data-toggle="tooltip"
-                        data-original-title="Copy to clipboard">Copy</button>
+                        <button id="btnCopy" type="button" class="btn btn-secondary" title="Copy to clipboard" data-toggle="tooltip"
+                        data-original-title="Copy to clipboard" disabled>Copy</button>
                     </td>
-                </thead>
+                </tr>
             </table>
         </div>
     </div>
@@ -61,6 +60,11 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
     </script>
 </body>
 

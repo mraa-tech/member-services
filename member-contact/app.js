@@ -1,6 +1,6 @@
 function getEmailList() {
     const url = "https://script.google.com/macros/s/AKfycbw7LsL3ASCbX82jmKa0K1_P66Lz8mBTqh5LLJbpxktF4GR4shm8qBLYig/exec";
-    const msg = document.getElementById('msg');
+    let msg = document.getElementById('msg');
     msg.innerHTML = "Please wait ...";
 
     fetch(url)
@@ -11,12 +11,19 @@ function getEmailList() {
 }
 
 function showList(arr) {
-    const table = document.getElementById("emailTable");
+    const table = document.getElementById('emailTable');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnGetEmails = document.getElementById('btnGetEmails');
+    let msg = document.getElementById('msg');  
+     
     arr.forEach(el => {
         table.insertRow(-1).insertCell(0).innerHTML = el.email;
     });
-    const msg = document.getElementById('msg');
-    msg.innerHTML = "";   
+
+    msg.innerHTML = "";  
+    btnCopy.disabled = false;
+    btnGetEmails.disabled = true;
+
 }
 
 function addRow() {
@@ -34,9 +41,10 @@ function addRow() {
 }
 
 function copyToClipboard() {
-    const listTable = document.getElementById("emailTable").tBodies[0].rows[0].cells[0].innerText;
     const rows = document.getElementById("emailTable").tBodies[0].rows;
     const textarea = document.createElement('textarea');
+    let msg = document.getElementById('msg');
+
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'absolute';
     textarea.style.left = '-9999px';
@@ -45,6 +53,7 @@ function copyToClipboard() {
     }
     document.body.appendChild(textarea);
     
+    msg.innerHTML = "List Copied";
     textarea.select();
     document.execCommand('copy');
 }
