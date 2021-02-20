@@ -7,25 +7,28 @@ function getEmailList() {
         .then(d => d.json())
         .then(d => {
             showList(d[0].data);
-        });    
+        });
 }
 
 function showList(arr) {
     const table = document.getElementById('emailTable');
     const btnCopy = document.getElementById('btnCopy');
     const btnGetEmails = document.getElementById('btnGetEmails');
-    let msg = document.getElementById('msg');  
-     
+    let msg = document.getElementById('msg');
+
     arr.forEach(el => {
-        let row = table.insertRow(-1);
-        row.insertCell(0).innerHTML = el.status;        
-        row.insertCell(0).innerHTML = el.email;
-        row.insertCell(0).innerHTML = el.firstname;
-        row.insertCell(0).innerHTML = el.lastname;
+        // validate good data
+        if (el.status) {
+            let row = table.insertRow(-1);
+            row.insertCell(0).innerHTML = el.status;
+            row.insertCell(0).innerHTML = el.email;
+            row.insertCell(0).innerHTML = el.firstname;
+            row.insertCell(0).innerHTML = el.lastname;
+        }
 
     });
 
-    msg.innerHTML = "";  
+    msg.innerHTML = "";
     btnCopy.disabled = false;
     btnGetEmails.disabled = true;
 
@@ -33,7 +36,7 @@ function showList(arr) {
 
 function addRow() {
     const url = "https://script.google.com/macros/s/AKfycbw7LsL3ASCbX82jmKa0K1_P66Lz8mBTqh5LLJbpxktF4GR4shm8qBLYig/exec";
-    fetch(url,{
+    fetch(url, {
         method: 'POST',
         cache: 'no-cache',
         mode: 'no-cors',
@@ -41,8 +44,10 @@ function addRow() {
             'ContentType': 'application/json'
         },
         redirect: 'follow',
-        body: JSON.stringify({name:"Jon"}) //test
-    }); 
+        body: JSON.stringify({
+            name: "Jon"
+        }) //test
+    });
 }
 
 function copyToClipboard() {
@@ -54,11 +59,11 @@ function copyToClipboard() {
     textarea.style.position = 'absolute';
     textarea.style.left = '-9999px';
     // start loop at 1 to skip header row
-    for (i=1; i<rows.length; i++) {
+    for (i = 1; i < rows.length; i++) {
         textarea.value += `${rows[i].cells[2].textContent},`;
     }
     document.body.appendChild(textarea);
-    
+
     msg.innerHTML = "List Copied";
     textarea.select();
     document.execCommand('copy');
