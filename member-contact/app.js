@@ -18,10 +18,11 @@ function showList(arr) {
      
     arr.forEach(el => {
         let row = table.insertRow(-1);
+        row.insertCell(0).innerHTML = el.status;        
         row.insertCell(0).innerHTML = el.email;
         row.insertCell(0).innerHTML = el.firstname;
         row.insertCell(0).innerHTML = el.lastname;
-        row.insertCell(0).innerHTML = el.status;
+
     });
 
     msg.innerHTML = "";  
