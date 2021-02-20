@@ -52,8 +52,9 @@ function copyToClipboard() {
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'absolute';
     textarea.style.left = '-9999px';
-    for (i=0; i<rows.length; i++) {
-        textarea.value += `${rows[i].textContent},`;
+    // start loop at 1 to skip header row
+    for (i=1; i<rows.length; i++) {
+        textarea.value += `${rows[i].cells[2].textContent},`;
     }
     document.body.appendChild(textarea);
     
