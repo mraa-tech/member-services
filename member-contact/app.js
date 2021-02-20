@@ -17,7 +17,11 @@ function showList(arr) {
     let msg = document.getElementById('msg');  
      
     arr.forEach(el => {
-        table.insertRow(-1).insertCell(0).innerHTML = el.email;
+        let row = table.insertRow(-1);
+        row.insertCell(0).innerHTML = el.email;
+        row.insertCell(0).innerHTML = el.first;
+        row.insertCell(0).innerHTML = el.last;
+        //table.insertRow(-1).insertCell(0).innerHTML = el.email;
     });
 
     msg.innerHTML = "";  
@@ -36,7 +40,7 @@ function addRow() {
             'ContentType': 'application/json'
         },
         redirect: 'follow',
-        body: JSON.stringify({name:"Jon"})
+        body: JSON.stringify({name:"Jon"}) //test
     }); 
 }
 
