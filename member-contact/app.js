@@ -19,8 +19,8 @@ function showList(arr) {
     arr.forEach(el => {
         let row = table.insertRow(-1);
         row.insertCell(0).innerHTML = el.email;
-        row.insertCell(0).innerHTML = el.first;
-        row.insertCell(0).innerHTML = el.last;
+        row.insertCell(0).innerHTML = el.firstname;
+        row.insertCell(0).innerHTML = el.lastname;
         //table.insertRow(-1).insertCell(0).innerHTML = el.email;
     });
 
