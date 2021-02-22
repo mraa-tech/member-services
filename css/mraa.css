@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+/* CSS Document - mraa.css */
+body,
+td,
+th {
+    font-family: Roboto, sans-serif;
+}
+body {
+    background-color: #fff;
+}
+.form-group .form-control {
+    font-weight: 900 !important;
+    font-size: 1.3em !important;
+}
+
+.center-type {
+    text-align: center !important;
+}
