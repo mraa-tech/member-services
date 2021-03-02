@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <!-- <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="../css/form-elements.css">
+    <!-- <link rel="stylesheet" href="../css/form-elements.css"> -->
     <!-- <link rel="stylesheet" href="../css/style.css"> -->
     <link rel="stylesheet" href="../css/mraa.css">
 
@@ -108,21 +108,56 @@
                         </fieldset>
 
                         <fieldset>
-                            <h4>Upload Your Artwork</h4>
-                            <div class="form-group">
-                                <label class="sr-only" for="f1-email">Email</label>
-                                <input type="text" name="f1-email" placeholder="Email..." class="f1-email form-control"
-                                    id="f1-email">
+                            <h4>Select Your Image to Upload</h4>
+                            <div><strong>Limit of <span id="maxPerArtist">[Loading...]</span> uploads per
+                                    Artist</strong></div>
+                            <strong>IMPORTANT NOTICE</strong> Your images are not actually uploaded until you press the
+                            SEND button
+
+                            <input accept="image/jpeg, image/png" type="file" id="imageFile" class="form-control-file">
+                            <div>All fields required *</div>
+                            <!-- Title -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Title of Work</span>
+                                </div>
+                                <input type="text" class="form-control" id="titleOfWork" aria-label="Title of Work"
+                                    required />
                             </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="f1-password">Password</label>
-                                <input type="password" name="f1-password" placeholder="Password..."
-                                    class="f1-password form-control" id="f1-password">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Width (in)</span>
+                                </div>
+                                <input type="number" class="form-control" id="sizeWidth" aria-label="Size: Width (in)"
+                                    min="1" max="999" required />
+                                <div class="input-group-prepend ml-3">
+                                    <span class="input-group-text">Height (in)</span>
+                                </div>
+                                <input type="number" class="form-control" id="sizeHeight" aria-label="Size: Height (in)"
+                                    min="1" max="999" required />
                             </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="f1-repeat-password">Repeat password</label>
-                                <input type="password" name="f1-repeat-password" placeholder="Repeat password..."
-                                    class="f1-repeat-password form-control" id="f1-repeat-password">
+                            <!-- Medium -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Medium</span>
+                                </div>
+                                <input type="text" class="form-control" id="medium" aria-label="Medium" required />
+                            </div>
+                            <!-- Price -->
+                            <div>
+                                <label for="price">Price *</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div>
+                                        <input type="number" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)" id="price" size="10" required />
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="f1-buttons">
                                 <button type="button" class="btn btn-previous">Previous</button>
