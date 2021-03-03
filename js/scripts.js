@@ -14,8 +14,8 @@ jQuery(document).ready(function () {
 	/*
 	    Form
 	*/
-	//$('.f1 fieldset:first').show();
-	$('.f1 fieldset:first').next().show(); // while testing second panel
+	$('.f1 fieldset:first').show();
+	//$('.f1 fieldset:first').next().show(); // while testing second panel
 	/* $('.f1 input[type="text"], .f1 input[type="password"], .f1 textarea').on('focus', function() {
 		$(this).removeClass('input-error');
 	}); */

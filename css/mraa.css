@@ -423,6 +423,9 @@ ul.navbar-nav {
 	border-color: #f35b3f;
 }
 
+.f1 .important-msg {
+	color: #f35b3f;
+}
 
 .form-group .form-control {
 	font-weight: 900 !important;
