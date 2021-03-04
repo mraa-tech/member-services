@@ -38,23 +38,32 @@
 <body>
 
     <!-- Top menu -->
-    <nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+    <!-- <nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            <div class="navbar-header"> -->
+    <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#top-navbar-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button> -->
-                <a class="navbar-brand" href="index.html">MRAA Call for Entry</a>
+    <!-- <a class="navbar-brand" href="index.html">MRAA Call for Entry</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div>EXHIBITION TITLE</div>
+            <div>Call for Entries</div> -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
 
+    <!-- </div>
+    </nav> -->
+    <div id="headerBar" class="row m-2 header-bar">
+        <div class="col-md-4 col-sm-12"><a class="navbar-brand" href="index.html">MRAA Call for Entry</a></div>
+        <div class="col-md-8 col-sm-12">
+            <div class="exhibition-title">exhibition title</div>
+            <div class="page-title">Call For Entries</div>
         </div>
-    </nav>
-
+    </div>
+    <div id="feedback" class="ml-4 mr-4 pt-2 exhibition-feedback">0 entries submitted. Available spots: 24</div>
     <!-- Top content -->
     <div class="top-content col-lg-12">
         <div class="container">
@@ -138,14 +147,16 @@
                         </fieldset>
 
                         <fieldset>
-                            <h2>Select Your Image to Upload</h2>
-                            <div><strong>Limit of <span id="maxPerArtist">[Loading...]</span> uploads per
-                                    Artist</strong></div>
-                            <p class="h5">
-                                <strong>IMPORTANT NOTICE</strong> Your images are not actually uploaded until you press
-                                the
-                                SEND button
-                            </p>
+                            <div class="upload-info">
+                                <div class="h4">Select Your Image to Upload</div>
+                                <p class="h5"><strong>Limit of <span id="maxPerArtist">[Loading...]</span> uploads per
+                                        Artist</strong></p>
+                                <p class="h5">
+                                    <strong>IMPORTANT NOTICE</strong> Your images are not actually uploaded until you press
+                                    the
+                                    SEND button
+                                </p>
+                            </div>
 
                             <input accept="image/jpeg, image/png" type="file" id="imageFile" class="form-control-file">
                             <div id="imageInfoSection" class="mt-4">
@@ -201,7 +212,8 @@
                                 </div>
                             </div>
                             <div id="imagePreview">
-                                <p class="h5 mt-3 important-msg" id="imageMessage">IF SATISIFIED, YOU MAY <strong>SEND YOUR
+                                <p class="h5 mt-3 important-msg" id="imageMessage">IF SATISIFIED, YOU MAY <strong>SEND
+                                        YOUR
                                         APPLICATION NOW</strong>
                                     -- OR CHANGE IMAGES BY DELETING ONE BELOW</p>
                                 <h3>Upload Queue</h3>

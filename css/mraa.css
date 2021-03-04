@@ -305,9 +305,10 @@ ul.navbar-nav {
 
 /***** Top content *****/
 
-.top-content {
+/* .top-content {
 	padding: 40px 0 0 0;
 }
+ */
 
 .top-content .text {
 	color: #fff;
@@ -340,7 +341,7 @@ ul.navbar-nav {
 }
 
 .f1 {
-	padding: 25px;
+	/* padding: 25px; */
 	background: #fff;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -483,9 +484,9 @@ ul.navbar-nav {
 		margin-top: 12px;
 	}
 
-	.top-content {
+	/* .top-content {
 		padding: 40px 0 110px 0;
-	}
+	} */
 
 }
 
@@ -523,4 +524,31 @@ only screen and (min-resolution: 2dppx) {
 		background-size: 162px 36px !important;
 	}
 
+}
+
+
+/* MRAA App specific */
+.exhibition-feedback,
+.header-bar,
+.exhibition-title,
+.page-title {
+	text-align: left;
+}
+
+.exhibition-feedback {
+	border-top: rgb(26, 26, 26) 1px solid;
+}
+
+.exhibition-title {
+	text-transform: uppercase;
+	color: rgb(26, 26, 26);
+	font-weight: 800;
+}
+
+.page-title {
+	font-weight: 600;
+}
+
+.upload-info {
+	color: rgb(26, 26, 26);
 }
