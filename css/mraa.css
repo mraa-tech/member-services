@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* Bootstrap override */
+h5,
+.h5 {
+	font-weight: 400;
+}
+
 /* CSS Document - mraa.css */
 body,
 td,
@@ -18,7 +24,7 @@ body {
 }
 
 strong {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 a,
@@ -39,7 +45,7 @@ h2 {
 	font-size: 38px;
 	font-weight: 100;
 	color: #555;
-	line-height: 50px;
+	/* line-height: 50px; */
 }
 
 h3 {
@@ -368,6 +374,7 @@ ul.navbar-nav {
 	left: 0;
 	height: 1px;
 	background: #3f6ff3;
+	width: 16.66%;
 }
 
 .f1-step {
