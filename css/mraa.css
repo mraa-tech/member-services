@@ -543,6 +543,8 @@ only screen and (min-resolution: 2dppx) {
 	text-transform: uppercase;
 	color: rgb(26, 26, 26);
 	font-weight: 800;
+	font-size: 1.2em;
+	line-height: 1em;
 }
 
 .page-title {
