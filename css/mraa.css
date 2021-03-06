@@ -201,7 +201,7 @@ button.btn.btn-add:focus,
 button.btn.btn-add:active:focus,
 button.btn.btn-add.active:focus {
 	background: white;
-	border: #867f7f solid 3px;
+	border: #0dc801 solid 3px;
 	color:rgb(51, 51, 51);
 }
 
