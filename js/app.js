@@ -1,18 +1,24 @@
-const webAppUrl = "https://script.google.com/macros/s/AKfycbyfXrwlwW5MvfA44NHm9RJNNk-xjcnh0bO5CCV7K3VPeQ9UqLzP6jCIL1xP6rCvfrms/exec?s=D3D66B&get=title";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyfXrwlwW5MvfA44NHm9RJNNk-xjcnh0bO5CCV7K3VPeQ9UqLzP6jCIL1xP6rCvfrms/exec?s=D3D66B&get=";
 const showId = "D3D66B";
 
-const items = {
-    "title": "title",
-    "showlimit": "limit",
-    "artistlimit": "entrylimit"
+const items = [
+    "title",
+    "showlimit"
+]
 
-}
-
-function retrieve(item) {
-    fetch(webAppUrl)
+function retrieveTitle() {
+    fetch(`${webAppUrl}title`)
         .then(d => d.json())
         .then(d => {
             updateTitle(d[1].title);
+        });
+}
+
+function retrieveShowLimit() {
+    fetch(`${webAppUrl}limit`)
+        .then(d => d.json())
+        .then(d => {
+            updateShowLimit(d[1].limit);
         });
 }
 
@@ -38,7 +44,8 @@ function bar_progress(progress_line_object, direction) {
 
 jQuery(document).ready(function () {
 	const titleElem = document.getElementById("exhibitionTitle");
-    const exhibitionTitle = retrieve(items.title);
+    retrieveTitle();
+	retrieveShowLimit();
     console.log(exhibitionTitle);
 	/*
 	    Form
