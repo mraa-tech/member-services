@@ -1,3 +1,29 @@
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyfXrwlwW5MvfA44NHm9RJNNk-xjcnh0bO5CCV7K3VPeQ9UqLzP6jCIL1xP6rCvfrms/exec?s=D3D66B&get=title";
+const showId = "D3D66B";
+
+const items = {
+    "title": "title",
+    "showlimit": "limit",
+    "artistlimit": "entrylimit"
+
+}
+
+function retrieve(item) {
+    fetch(webAppUrl)
+        .then(d => d.json())
+        .then(d => {
+            updateTitle(d[1].title);
+        });
+}
+
+function updateTitle(t) {
+	document.getElementById("exhibitionTitle").innerHTML = t;
+}
+
+function updateShowLimit(l) {
+	document.getElementById("maxPerShow").innerHTML = l;
+}
+
 function bar_progress(progress_line_object, direction) {
 	var number_of_steps = progress_line_object.data('number-of-steps');
 	var now_value = progress_line_object.data('now-value');
@@ -11,6 +37,9 @@ function bar_progress(progress_line_object, direction) {
 }
 
 jQuery(document).ready(function () {
+	const titleElem = document.getElementById("exhibitionTitle");
+    const exhibitionTitle = retrieve(items.title);
+    console.log(exhibitionTitle);
 	/*
 	    Form
 	*/
