@@ -1,13 +1,12 @@
-const webAppUrl = "https://script.google.com/macros/s/AKfycbyfXrwlwW5MvfA44NHm9RJNNk-xjcnh0bO5CCV7K3VPeQ9UqLzP6jCIL1xP6rCvfrms/exec?s=D3D66B&get=";
-const showId = "D3D66B";
-
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyfXrwlwW5MvfA44NHm9RJNNk-xjcnh0bO5CCV7K3VPeQ9UqLzP6jCIL1xP6rCvfrms/exec";
+const showId = getShowId();
 const items = [
     "title",
     "showlimit"
 ]
 
 function retrieveTitle() {
-    fetch(`${webAppUrl}title`)
+    fetch(`${webAppUrl}?s=${showId}&get=title`)
         .then(d => d.json())
         .then(d => {
             updateTitle(d[1].title);
@@ -15,7 +14,7 @@ function retrieveTitle() {
 }
 
 function retrieveShowLimit() {
-    fetch(`${webAppUrl}limit`)
+    fetch(`${webAppUrl}?s=${showId}&get=limit`)
         .then(d => d.json())
         .then(d => {
             updateShowLimit(d[1].limit);
@@ -23,11 +22,17 @@ function retrieveShowLimit() {
 }
 
 function updateTitle(t) {
-	document.getElementById("exhibitionTitle").innerHTML = t;
+	let t1=t==undefined?"Not Found - Check Show Id":t;
+	document.getElementById("exhibitionTitle").innerHTML = t1;
 }
 
 function updateShowLimit(l) {
-	document.getElementById("maxPerShow").innerHTML = l;
+	let l1=l==undefined?"unknown":l;
+	document.getElementById("maxPerShow").innerHTML = l1;
+}
+
+function getShowId() {
+	return location.search.substring(1).toUpperCase();
 }
 
 function bar_progress(progress_line_object, direction) {
