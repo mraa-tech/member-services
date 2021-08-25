@@ -1,5 +1,5 @@
 function getEmailList() {
-    const url = "https://script.google.com/macros/s/AKfycbyMVgIXgdkM51WXD8aFEXJeZuUwYpxjFf6DV2xN_DQvc6eiiQ289q1fGRCfz84dj8WcqA/exec"
+    const url = "https://script.google.com/macros/s/AKfycbyXv_Zkj53oJgbbwYH7nAAOSZhXWe7YC6rKPrKY1GKGwFoGEl0H7jz-F-iamRV__QmIGg/exec"
     let msg = document.getElementById('msg');
     msg.innerHTML = "Fetching, Please wait ...";
 
