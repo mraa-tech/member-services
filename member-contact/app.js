@@ -20,9 +20,6 @@ function showList(arr) {
     arr.forEach(el => {
         // validate good data
         if (activeMemberStatus.includes(el.status)) {
-
-        //}
-        //if (el.status == "active" || el.status == "pending") {
             let row = table.insertRow(-1);
             row.insertCell(0).innerHTML = el.status;
             row.insertCell(0).innerHTML = el.email;
