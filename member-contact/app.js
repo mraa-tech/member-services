@@ -17,6 +17,7 @@ function showList(arr) {
     const btnGetEmails = document.getElementById('btnGetEmails');
     let msg = document.getElementById('msg');
 
+    let count = 0;
     arr.forEach(el => {
         // validate good data
         if (activeMemberStatus.includes(el.status)) {
@@ -25,10 +26,13 @@ function showList(arr) {
             row.insertCell(0).innerHTML = el.email;
             row.insertCell(0).innerHTML = el.firstname;
             row.insertCell(0).innerHTML = el.lastname;
+            count += 1;
         }
 
     });
 
+    let row = table.insertRow(-1);
+    row.insertCell(0).innerHTML = `Total: ${count}`;
     msg.innerHTML = "";
     btnCopy.disabled = false;
     btnGetEmails.disabled = true;
