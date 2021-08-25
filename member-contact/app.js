@@ -18,7 +18,7 @@ function showList(arr) {
 
     arr.forEach(el => {
         // validate good data
-        if (el.status) {
+        if (el.status == "active") {
             let row = table.insertRow(-1);
             row.insertCell(0).innerHTML = el.status;
             row.insertCell(0).innerHTML = el.email;
