@@ -33,6 +33,9 @@ function showList(arr) {
 
     let row = table.insertRow(-1);
     row.insertCell(0).innerHTML = `Total: ${count}`;
+    row.insertCell(0).innerHTML = "";
+    row.insertCell(0).innerHTML = "";
+    row.insertCell(0).innerHTML = "";
     msg.innerHTML = "";
     btnCopy.disabled = false;
     btnGetEmails.disabled = true;
