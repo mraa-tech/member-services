@@ -11,6 +11,7 @@ function getEmailList() {
 }
 
 function showList(arr) {
+    const activeMemberStatus = ["active", "pending"];
     const table = document.getElementById('emailTable');
     const btnCopy = document.getElementById('btnCopy');
     const btnGetEmails = document.getElementById('btnGetEmails');
@@ -18,7 +19,10 @@ function showList(arr) {
 
     arr.forEach(el => {
         // validate good data
-        if (el.status == "active") {
+        if (activeMemberStatus.includes(el.status)) {
+
+        //}
+        //if (el.status == "active" || el.status == "pending") {
             let row = table.insertRow(-1);
             row.insertCell(0).innerHTML = el.status;
             row.insertCell(0).innerHTML = el.email;
