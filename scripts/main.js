@@ -4,7 +4,7 @@ const EP_MEMBERS_DUES =
     "q="
 
 function fetchTotalMembers() {
-    const url = ENDPOINT + "totalmembers"
+    const url = EP_MEMBERS_DUES + "totalmembers"
     fetch(url)
         .then(resp => resp.json())
         .then(resp => {
