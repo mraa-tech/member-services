@@ -25,14 +25,19 @@ function fetchTotalExhibitingMembers() {
         .catch()
 }
 
+function fetchMemberCounts() {
+    fetchTotalMembers()
+    fetchTotalExhibitingMembers()
+}
+
 function showTotalMembers(t) {
     let ele = document.getElementById('memberCount')
     ele.append(t)
 }
 
-function showTotalMembers(t) {
+function showTotalExhibitingMembers(t) {
     let ele = document.getElementById('exhibitingMemberCount')
     ele.append(t)
 }
 
-document.addEventListener("DOMContentLoaded", fetchTotalMembers)
+document.addEventListener("DOMContentLoaded", fetchMemberCounts)
