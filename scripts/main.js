@@ -1,6 +1,6 @@
-// Endpoint => Members Dues Project, version 10
+// Endpoint => Members Dues Project, version 11
 const EP_MEMBERS_DUES = 
-    "https://script.google.com/macros/s/AKfycbzGVVEYcXe_nlTESK9YWwsYr4jtSXowoIpJe-9t5fxFOAIgjdJ9FWjXXnXvItTIASlW/exec" +
+    "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
 function fetchTotalMembers() {
