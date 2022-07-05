@@ -31,12 +31,16 @@ function fetchMemberCounts() {
 }
 
 function showTotalMembers(t) {
+    let loading = document.getElementById('memberCountLoading')
     let ele = document.getElementById('memberCount')
+    loading.remove()
     ele.append(t)
 }
 
 function showTotalExhibitingMembers(t) {
+    let loading = document.getElementById('exhibitingCountLoading')
     let ele = document.getElementById('exhibitingMemberCount')
+    loading.remove()
     ele.append(t)
 }
 
