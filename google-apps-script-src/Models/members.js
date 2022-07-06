@@ -39,7 +39,8 @@ const M_DASHBOARD_FIELDS_MAP = {
         "city" : "g2:h",
         "pay-method" : "j2:k",
         "members" : "n1",
-        "unpaid-members" : "n3"
+        "unpaid-members" : "n3",
+        "pending-members" : "n4"
     }
 }
 
@@ -103,8 +104,13 @@ function getTotalMembers(type) {
             count = parseInt(count)
             break
 
+        case "pending" :
+            count = M_DASHBOARD_TABLE.getRange(M_DASHBOARD_FIELDS_MAP["counts"]["pending-members"]).getDisplayValue()
+            count = parseInt(count)
+            break
+
         case "exhibiting" :
-            let list = M_DASHBOARD_TABLE.getRange(M_DASHBOARD_FIELDS_MAP["counts"]["membership-type"]).getDisplayValues()
+            var list = M_DASHBOARD_TABLE.getRange(M_DASHBOARD_FIELDS_MAP["counts"]["membership-type"]).getDisplayValues()
             list = list.filter(l => l[0] !== "")
             let exhibiting = list.filter( function(l) {
                 let _l = l[0]
@@ -113,6 +119,16 @@ function getTotalMembers(type) {
             count = parseInt(exhibiting[0][1])
             break
         
+        case "associate" :
+            var list = M_DASHBOARD_TABLE.getRange(M_DASHBOARD_FIELDS_MAP["counts"]["membership-type"]).getDisplayValues()
+            list = list.filter(l => l[0] !== "")
+            let associate = list.filter( function(l) {
+                let _l = l[0]
+                return _l.toLowerCase() === "associate"
+            })
+            count = parseInt(exhibiting[0][1])
+            break
+
         default :
             count = M_DASHBOARD_TABLE.getRange(M_DASHBOARD_FIELDS_MAP["counts"]["members"]).getDisplayValue()
             count = parseInt(count)
