@@ -3,6 +3,10 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
+const EP_MEMBERS_SERVICES =
+    "https://script.google.com/macros/s/AKfycbx2YE8zavh1b55gS85fdFevcLrFsUmBE7trGxmfBa5jfTTAQfqEsHzKwqhtCOYHMN7qxQ/exec" +
+    "?q="
+
 function fetchTotalMembers() {
     const url = EP_MEMBERS_DUES + "totalmembers"
     fetch(url,
