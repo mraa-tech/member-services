@@ -5,7 +5,10 @@ const EP_MEMBERS_DUES =
 
 function fetchTotalMembers() {
     const url = EP_MEMBERS_DUES + "totalmembers"
-    fetch(url)
+    fetch(url,
+        {
+            cache: "default"
+        })
         .then(resp => resp.json())
         .then(resp => {
             t = resp
