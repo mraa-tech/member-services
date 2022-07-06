@@ -126,7 +126,7 @@ function getTotalMembers(type) {
                 let _l = l[0]
                 return _l.toLowerCase() === "associate"
             })
-            count = parseInt(exhibiting[0][1])
+            count = parseInt(associate[0][1])
             break
 
         default :

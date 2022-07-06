@@ -11,6 +11,7 @@ ROUTES.path("duesforassociate", getDuesForAssociateResponse)
 ROUTES.path("duesforexhibiting", getDuesForExhibitingResponse)
 ROUTES.path("totalmembers", getTotalMembersResponse)
 ROUTES.path("totalexhibitingmembers", getTotalExhibitingMembersResponse)
+ROUTES.path("totalassociatemembers", getTotalAssociateMembersResponse)
 ROUTES.path("totalpendingmembers", getTotalPendingMembersResponse)
 
 function doGet(e) {
@@ -59,6 +60,9 @@ function getTotalExhibitingMembersResponse() {
     return getTotalMembers("exhibiting")
 }
 
+function getTotalAssociateMembersResponse() {
+    return getTotalMembers("associate")
+}
 function getTotalPendingMembersResponse() {
     return getTotalMembers("pending")
 }
