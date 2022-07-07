@@ -21,7 +21,7 @@
 
 .dashboard-box {
     display: grid;
-    border: 1px solid silver;
+    border: 1px solid rgba(33, 37, 41, 0.125);
     justify-content: center;
     border-radius: 10px;
     padding: 10px;
