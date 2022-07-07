@@ -3,10 +3,12 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
-// Endpoint => MRAA Member Services Project, latest version 4
+// Endpoint => MRAA Member Services Project, latest version 5
 const EP_MEMBERS_SERVICES =
-    "https://script.google.com/macros/s/AKfycbz2YUiEk6j6JwTW9pJEB9QmT_fFKTAUQwMrdA4gfp-gbfSHuczG6TMX-9Wi7FwrfySYGQ/exec" +
+    "https://script.google.com/macros/s/AKfycbxVjJOeeyfNw19oJE773pPn3NWG3UTgHsrDGq-nCZTgihy2RED5Mfyxrv47EiVr08_znA/exec" +
     "?q="
+
+var totalMembers = 0
 
 function fetchTotalMembers() {
     const url = EP_MEMBERS_SERVICES + "totalmembers"
@@ -17,6 +19,7 @@ function fetchTotalMembers() {
         .then(resp => resp.json())
         .then(resp => {
             t = resp
+            totalMembers = t
             showTotalMembers(t)
         })
         .catch()
@@ -55,11 +58,23 @@ function fetchTotalPendingMembers() {
     .catch()
 }
 
+function fetchTotalDuesPaid() {
+    const url = EP_MEMBERS_SERVICES + "totalduespaid"
+    fetch(url)
+    .then(resp => resp.json())
+    .then(resp => {
+        t = resp
+        showTotalDuesPaid(t)
+    })
+    .catch()
+}
+
 function fetchMemberCounts() {
     fetchTotalMembers()
     fetchTotalExhibitingMembers()
     fetchTotalPendingMembers()
     fetchTotalAssociateMembers()
+    fetchTotalDuesPaid()
 }
 
 function showTotalMembers(t) {
@@ -83,6 +98,14 @@ function showTotalPendingMembers(t) {
 
 function showTotalAssociateMembers(t) {
     let ele = document.getElementById('associateCount')
+    ele.innerText = t
+}
+
+function showTotalDuesPaid(t) {
+    let ele = document.getElementById('duesPaid')
+    if (t < totalMembers) {
+        ele.parentElement.classList.add("warning")
+    } 
     ele.innerText = t
 }
 

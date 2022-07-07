@@ -40,7 +40,8 @@ const M_DASHBOARD_FIELDS_MAP = {
         "pay-method" : "j2:k",
         "members" : "n1",
         "unpaid-members" : "n3",
-        "pending-members" : "n4"
+        "pending-members" : "n4",
+        "dues-paid" : "n5"
     }
 }
 
@@ -136,4 +137,12 @@ function getTotalMembers(type) {
     }
 
     return count
+}
+
+function getDuesPaid() {
+    let d =  M_DASHBOARD_TABLE
+        .getRange(M_DASHBOARD_FIELDS_MAP["counts"]["dues-paid"])
+        .getDisplayValue()
+    
+    return parseInt(d)
 }
