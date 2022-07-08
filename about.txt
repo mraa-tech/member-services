@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Duru Sans
+- Font Author: Copyright (c) 2010 by Sorkin Type Co with Reserved Font Name Duru.
+- Font Source: http://fonts.gstatic.com/s/durusans/v19/xn7iYH8xwmSyTvEV_HOxT_fYdN-WZw.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
