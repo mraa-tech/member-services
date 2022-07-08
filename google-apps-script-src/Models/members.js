@@ -21,9 +21,10 @@ const DIRECTORY_FIELDS_MAP = {
     "membership-type" : 13,
     "jury-date" : 14,
     "medium" : 15,
-    "artist-signature" : 16,
-    "business-name" : 17,
-    "comments" : 18
+    "date-joined" : 16,
+    "artist-signature" : 17,
+    "business-name" : 18,
+    "comments" : 19
 }
 
 const M_SETTINGS_FIELDS_MAP = {
