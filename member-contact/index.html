@@ -1,60 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>MRAA Member Services - Email List</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MRAA Member Services - Email List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/dashboard.css" />
+        <link rel="stylesheet" href="../css/pages.css" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+    </head>
 
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/pages.css">
-</head>
-
-<body>
-    <div class="container mraa-container">
-        <div class="dashboard-hdr">
-            <h1>MRAA Member Services Dashboard</h1>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" style="padding-left: 15px;">
-            <a class="navbar-brand" href="#">MRAA Tech</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="..">Home <span class="sr-only">(current)</span></a>
-                </div>
+    <body>
+        <div class="container mraa-container">
+            <div class="dashboard-hdr">
+                <h1>MRAA Member Services Dashboard</h1>
             </div>
-        </nav>
+            <nav
+                class="navbar navbar-expand-lg navbar-light bg-light mb-2"
+                style="padding-left: 15px"
+            >
+                <a class="navbar-brand" href="#">MRAA Tech</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href=".."
+                            >Home <span class="sr-only">(current)</span></a
+                        >
+                    </div>
+                </div>
+            </nav>
 
-        <h1>Active Member Email List</h1>
-        <div class="mt-2 ml-2">
-            <button id="btnGetEmails" class="btn btn-primary mr-2">Get Emails</button>
-            <span id="msg"></span>
+            <h1>Active Member Email List</h1>
+            <div class="mt-2 ml-2">
+                <button id="btnGetEmails" class="btn btn-primary mr-2">
+                    Get Emails
+                </button>
+                <span id="msg"></span>
+            </div>
+            <div class="content mt-2">
+                <table id="emailTable" class="table table-striped">
+                    <tr>
+                        <td colspan="4">
+                            <button
+                                id="btnCopy"
+                                type="button"
+                                class="btn btn-secondary"
+                                title="Copy to clipboard"
+                                data-toggle="tooltip"
+                                data-original-title="Copy to clipboard"
+                                disabled
+                            >
+                                Copy
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="content mt-2">
-            <table id="emailTable" class="table table-striped">
-                <tr>
-                    <td colspan="4">
-                        <button id="btnCopy" type="button" class="btn btn-secondary" title="Copy to clipboard"
-                            data-toggle="tooltip" data-original-title="Copy to clipboard" disabled>Copy</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <script src="app.js?v=0.5"></script>
+        <script src="app.js?v=0.5"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        })
-    </script>
-</body>
-
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+    </body>
 </html>
