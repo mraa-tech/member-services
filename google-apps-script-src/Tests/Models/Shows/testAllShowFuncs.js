@@ -1,11 +1,11 @@
 function testAllShowFuncsRunAll() {
-/*     testGetAllShows(true)
+    testGetAllShows(true)
     testGetShow(true)
     testGetShowName(true)
     testGetAllShowIds(true)
     testGetMaxEntriesPerShow(true)
     testGetMaxEntriesPerArtist(true) 
-    testGetAllOpenShows(true)*/
+    testGetAllOpenShows(true)
     testgetShowIdByName(true)
 }
 
@@ -24,13 +24,10 @@ function testGetShow(verbose) {
     
     if (verbose) {
         console.log("Test %s: Show Object %s ", t, d)
+        for (const key in d) {
+            console.log(`Test ${t} : ${key} = ${d[key]}\n`)
+        }
     }
-
-/*     if ("{condition}") {
-        console.log("Test %s pass", t)
-    } else {
-        console.error("Test %s fail", t)
-    } */
     return 
 }
 
