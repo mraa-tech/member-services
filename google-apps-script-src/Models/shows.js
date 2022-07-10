@@ -111,7 +111,7 @@ function getShow(id) {
             show.registrationLink = d[cfeConfigSchema.registrationlink.colToIndex()]
         } 
     }
-    return show;
+    return show
 }
 
 /**
@@ -120,7 +120,7 @@ function getShow(id) {
  * @returns {string} Show name
  */
 function getShowName(id) {
-    return getShow(id).name;
+    return getShow(id).name
 }
 
 /**
@@ -129,7 +129,7 @@ function getShowName(id) {
  */
 function getAllShowIds() {
     const allShows = getAllShows()
-    return allShows.map(s => s[0]);
+    return allShows.map(s => s[0])
 
 }
 
@@ -142,11 +142,11 @@ function getMaxEntriesPerShow(id) {
     // Ensure a number is returned if missing
     let max = 0;
     const show = getShow(id)
-    const maxEntriesPerShow = show.maxEntriesPerShow;
+    const maxEntriesPerShow = show.maxEntriesPerShow
     if (maxEntriesPerShow) {
-        max = parseInt(maxEntriesPerShow);
+        max = parseInt(maxEntriesPerShow)
     }
-    return max;
+    return max
 }
 
 /**
@@ -156,7 +156,7 @@ function getMaxEntriesPerShow(id) {
  */
 function getMaxEntriesPerArtist(id) {
     const show = getShow(id) 
-    return show.maxEntriesPerArtist;
+    return show.maxEntriesPerArtist
 }
 
 /** 
@@ -165,7 +165,7 @@ function getMaxEntriesPerArtist(id) {
  * @returns {boolean} yes/no
  */
 function getPayFeeOnly(id) {
-    return getShow(id).payFeeOnly;
+    return getShow(id).payFeeOnly
 }
 
 /**
@@ -214,5 +214,88 @@ function getShowIdByName(name) {
     return showId[0][idPos]
 }
 
-// =====================================================================
+// =====Moved From Submissions================================================================
+// Todo refactor using new data structure
+/**
+ * Get total entries for the event from the pivot table
+ * @param {string}  Id
+ * @returns {number} Total
+ */
+ function getTotalByEvent(id) {
+    const cfeTables = getCFETables()
+    const cfeTitleCounts = connect(CFE_ID).getSheetByName(cfeTables.countsbytitle.name)
+    const cfeTitleCountsSchema = cfeTables.countsbytitle.schema
+    const startRow = cfeTables.countsbytitle.headers + 1
+    const startCol = 1
+    const data = cfeTitleCounts
+        .getRange(startRow, 
+                startCol, 
+                cfeTitleCounts.getLastRow() - startRow, 
+                cfeTitleCounts.getLastColumn())
+        .getValues()
+    const idPos =   cfeTitleCountsSchema.id.colToIndex()  
+    const countPos = cfeTitleCountsSchema.count.colToIndex()
+    const filteredData = data.filter(r => r[idPos] === id)
+    let totalByEvent = 0
 
+    if (filteredData.length > 0) {
+        totalByEvent = parseInt(filteredData[0][countPos])
+    }
+    return totalByEvent
+}
+
+/**
+ * Get total number of entries for an event for each artist
+ * @param {string} Event Title
+ * @param {string} Artist email
+ * @returns {number} Total
+ */
+ function getTotalByEventArtist(evtTitle, email) {
+    const cfeTables = getCFETables()
+    const cfeTitleCounts = connect(CFE_ID).getSheetByName(cfeTables.countsbytitleartist.name)
+    const cfeTitleCountsSchema = cfeTables.countsbytitleartist.schema
+    const startRow = cfeTables.countsbytitleartist.headers + 1
+    const startCol = 1
+    const titlePos = cfeTitleCountsSchema.title.colToIndex()
+    const emailPos = cfeTitleCountsSchema.email.colToIndex()
+    const countPos = cfeTitleCountsSchema.count.colToIndex()
+    const data = cfeTitleCounts
+        .getRange(startRow, 
+                startCol, 
+                cfeTitleCounts.getLastRow() - startRow, 
+                cfeTitleCounts.getLastColumn())
+        .getValues()
+    let totalByEventArtist = 0;
+    //let data = dataCountsSheet.getRange(CountsRangeMap.eventArtistCounts+dataCountsSheet.getLastRow()).getValues();
+    let evtCount = data.filter(function(r) {
+        return r[titlePos].toLowerCase() === evtTitle.toLowerCase() && r[emailPos].toLowerCase() === email.toLowerCase();
+    })
+
+    if (evtCount.length > 0) {
+        totalByEventArtist = evtCount[0][countPos];
+    }
+    return totalByEventArtist;
+}
+
+/**
+ * Get shows that are currently calling for entries
+ */
+ function getCurrentCalls() {
+    const cfeTables = getCFETables()
+    const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+    const cfeExhibitsSchema = cfeTables.exhibits.schema
+    const startRow = cfeTables.exhibits.headers + 1
+    const startCol = cfeExhibitsSchema.eventtitle.colToIndex() + 1
+    const data = cfeExhibits
+        .getRange(startRow, 
+                startCol, 
+                cfeExhibits.getLastRow() - startRow, 
+                1)
+        .getDisplayValues()
+
+    //let data = dataExhibitSheet.getRange(2, DataColMap.event_title, dataExhibitSheet.getLastRow()-1, 1).getValues();
+    const filteredData = data.map( d => d[0])
+    const uniqueEvents = [... new Set(filteredData)]
+
+    return uniqueEvents
+}
