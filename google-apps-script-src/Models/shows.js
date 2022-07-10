@@ -95,7 +95,6 @@ function getShow(id) {
     let show = {}
 
     for (let d of data) {
-        //let i = cfeConfigSchema.showid.colToIndex()
         if (d[cfeConfigSchema.showid.colToIndex()] === id) {
             show.id = d[cfeConfigSchema.showid.colToIndex()]
             show.name = d[cfeConfigSchema.exhibitname.colToIndex()]
@@ -177,7 +176,7 @@ function getAllOpenShows() {
     const cfeTables = getCFETables()
     const cfeConfigSchema = cfeTables.config.schema
     // schema defines fields by column letter, need to convert to a zero based integer for array access
-    const statusPos = (cfeConfigSchema.status).toUpperCase().charCodeAt(0) - 65 // ascii code for uppercase A
+    const statusPos = cfeConfigSchema.status.colToIndex()
     const data = getAllShows()
     return data.filter(d  => d[statusPos] === "OPEN" )
 
@@ -207,10 +206,13 @@ function getShowIdByName(name) {
     const cfeTables = getCFETables()
     const cfeConfigSchema = cfeTables.config.schema
     // schema defines fields by column letter, need to convert to a zero based integer for array access
-    const namePos = (cfeConfigSchema.exhibitname).toUpperCase().charCodeAt(0) - 65 // ascii code for uppercase A
-    const idPos = (cfeConfigSchema.showid).toUpperCase().charCodeAt(0) - 65
+    const namePos = cfeConfigSchema.exhibitname.colToIndex() 
+    const idPos = cfeConfigSchema.showid.colToIndex()
     const data = getAllShows()
     const showId = data.filter( d => d[namePos] === name)
 
     return showId[0][idPos]
 }
+
+// =====================================================================
+

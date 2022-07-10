@@ -2,11 +2,11 @@ function testAllShowFuncsRunAll() {
 /*     testGetAllShows(true)
     testGetShow(true)
     testGetShowName(true)
-    testGetAllShowIds(true) */
+    testGetAllShowIds(true)
     testGetMaxEntriesPerShow(true)
-    testGetMaxEntriesPerArtist(true)
-/*     testGetAllOpenShows(true)
-    testgetShowIdByName(true) */
+    testGetMaxEntriesPerArtist(true) 
+    testGetAllOpenShows(true)*/
+    testgetShowIdByName(true)
 }
 
 function testGetAllShows(verbose) {
