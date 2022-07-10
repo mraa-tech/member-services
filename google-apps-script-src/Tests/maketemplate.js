@@ -3,8 +3,8 @@ function testRunnerTemplateRunAll() {
 }
 
 function testRunnerTemplate1(expected, verbose) {
-    let d = "{replace me}"
-    let t = 1
+    const d = "{replace me}"
+    const t = 1
     
     if (verbose) {
         console.log("Test %s: {replace me} %s ", t, d)

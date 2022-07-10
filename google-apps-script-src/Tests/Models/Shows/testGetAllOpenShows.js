@@ -1,14 +1,14 @@
 function testGetAllOpenShowsRunAll() {
-    testRunnerTemplate1(1, true)
+    testGetAllOpenShows1(1, true)
 }
 
-function testRunnerTemplate1(expected, verbose) {
+function testGetAllOpenShows1(expected, verbose) {
     let d = getAllOpenShows()
     let numOfShows = d.length
     let t = 1
     
     if (verbose) {
-        console.log("Test %s: All Open Shows %s ", t, d)
+        console.log("Test %s: All Open Shows %s => ", t, d)
         console.log("  Number of open shows: %s ", numOfShows)
     }
 

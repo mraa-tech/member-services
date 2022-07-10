@@ -1,82 +1,83 @@
-//const CFE_DB = connect(CFE_ID)
-
-const CFE_TABLES = {
-    "exhibits" : {
-        "name" : "Exhibits",
-        "type" : "standard",
-        "headers" : 1,
-        "schema" : {
-            "eventid" : "a",
-            "eventtitle" : "b",
-            "firstname" : "c",
-            "lastname" : "d",
-            "email" : "e",
-            "phone" : "f",
-            "worktitle" : "g",
-            "medium" : "h",
-            "width" : "i",
-            "height" : "j",
-            "price" : "k",
-            "filename" : "l",
-            "fileid" : "m",
-            "member" : "n",
-            "availablity" : "o", // not currently used
-            "hidden" : "p", // not currently used
-            "timestamp" : "q"
+function getCFETables() {
+    return {
+        "exhibits" : {
+            "name" : "Exhibits",
+            "type" : "standard",
+            "headers" : 1,
+            "schema" : {
+                "eventid" : "a",
+                "eventtitle" : "b",
+                "firstname" : "c",
+                "lastname" : "d",
+                "email" : "e",
+                "phone" : "f",
+                "worktitle" : "g",
+                "medium" : "h",
+                "width" : "i",
+                "height" : "j",
+                "price" : "k",
+                "filename" : "l",
+                "fileid" : "m",
+                "member" : "n",
+                "availablity" : "o", // not currently used
+                "hidden" : "p", // not currently used
+                "timestamp" : "q"
+            },
         },
-    },
-    "countsbytitleartist" : {
-        "name" : "Counts By Title Artist",
-        "type" : "pivot",
-        "headers" : 1,
-        "summary" : "Grand Total",
-        "schema" : {
-            "title" : "a",
-            "email" : "b",
-            "count" : "c",
+        "countsbytitleartist" : {
+            "name" : "Counts By Title Artist",
+            "type" : "pivot",
+            "headers" : 1,
+            "summary" : "Grand Total",
+            "schema" : {
+                "title" : "a",
+                "email" : "b",
+                "count" : "c",
+            },
         },
-    },
-    "countsbyartisttitle" : {
-        "name" : "Counts By Artist Title",
-        "type" : "pivot",
-        "headers" : 1,
-        "summary" : "Grand Total",
-        "schema" : {
-            "email" : "a",
-            "title" : "b",
-            "count" : "c",
+        "countsbyartisttitle" : {
+            "name" : "Counts By Artist Title",
+            "type" : "pivot",
+            "headers" : 1,
+            "summary" : "Grand Total",
+            "schema" : {
+                "email" : "a",
+                "title" : "b",
+                "count" : "c",
+            },
         },
-    },
-    "countsbytitle" : {
-        "name" : "Counts By Id",
-        "type" : "pivot",
-        "headers" : 1,
-        "summary" : "Grand Total",
-        "schema" : {
-            "id" : "a",
-            "count" : "b",
+        "countsbytitle" : {
+            "name" : "Counts By Id",
+            "type" : "pivot",
+            "headers" : 1,
+            "summary" : "Grand Total",
+            "schema" : {
+                "id" : "a",
+                "count" : "b",
+            },
         },
-    },
-    "config" : {
-        "name" : "Config",
-        "type" : "standard",
-        "headers" : 1,
-        "schema" : {
-            "showid": "a",
-            "exhibitname": "b",
-            "cfeopendate": "c",
-            "cfeclosedate": "d",
-            "maxentriesperartist": "e",
-            "maxentriespershow": "f",
-            "imagefolderid": "g",
-            "allownfs": "h",
-            "status": "i",
-            "payfeeonly": "j",
-            "purchaselimit": "k",
-            "showopendate" : "l",
-            "showclosedate" : "m",
-            "registrationlink": "n"
-        },
+        "config" : {
+            "name" : "Config",
+            "type" : "standard",
+            "headers" : 1,
+            "schema" : {
+                "showid": "a",
+                "exhibitname": "b",
+                "cfeopendate": "c",
+                "cfeclosedate": "d",
+                "maxentriesperartist": "e",
+                "maxentriespershow": "f",
+                "imagefolderid": "g",
+                "allownfs": "h",
+                "status": "i",
+                "payfeeonly": "j",
+                "purchaselimit": "k",
+                "showopendate" : "l",
+                "showclosedate" : "m",
+                "registrationlink": "n"
+            },
+        }
+    
     }
 
 }
@@ -88,27 +89,27 @@ const CFE_TABLES = {
  */
 function getShow(id) {
     // connect to file and open sheet
-    let cfeConfig = connect(CFE_ID).getSheetByName(CFE_TABLES.config.name)
-    let startRow = CFE_TABLES.config.headers + 1
-    let startCol = 1
-    let data = cfeConfig.getRange(startRow, startCol, cfeConfig.getLastRow() - startRow, cfeConfig.getLastColumn()).getDisplayValues()
+    const cfeTables = getCFETables()
+    const data = getAllShows()
+    const cfeConfigSchema = cfeTables.config.schema
     let show = {}
 
     for (let d of data) {
-        if (d[CFE_TABLES.config.schema.showid] === id) {
-            show.id = d[CFE_TABLES.config.schema.showid]
-            show.name = d[CFE_TABLES.config.schema.exhibitname]
-            show.openDate = d[CFE_TABLES.config.schema.cfeopendate]
-            show.closeDate = d[CFE_TABLES.config.schema.cfeclosedate]
-            show.maxEntriesPerArtist = d[CFE_TABLES.config.schema.maxentrieseerartist]
-            show.maxEntriesPerShow = d[CFE_TABLES.config.schema.maxentriespershow]
-            show.imageFolderId = d[CFE_TABLES.config.schema.imagefolderid]
-            show.allowNFS = d[CFE_TABLES.config.schema.allownfs]
-            show.payFeeOnly = d[CFE_TABLES.config.schema.payfeeonly]
-            show.purchaseLimit = d[CFE_TABLES.config.schema.purchaselimit]
-            show.showopen = d[CFE_TABLES.config.schema.showopendate]
-            show.showclose = d[CFE_TABLES.config.schema.showclosedate]
-            show.registrationLink = d[CFE_TABLES.config.schema.registrationlink]
+        //let i = cfeConfigSchema.showid.colToIndex()
+        if (d[cfeConfigSchema.showid.colToIndex()] === id) {
+            show.id = d[cfeConfigSchema.showid.colToIndex()]
+            show.name = d[cfeConfigSchema.exhibitname.colToIndex()]
+            show.openDate = d[cfeConfigSchema.cfeopendate.colToIndex()]
+            show.closeDate = d[cfeConfigSchema.cfeclosedate.colToIndex()]
+            show.maxEntriesPerArtist = d[cfeConfigSchema.maxentriesperartist.colToIndex()]
+            show.maxEntriesPerShow = d[cfeConfigSchema.maxentriespershow.colToIndex()]
+            show.imageFolderId = d[cfeConfigSchema.imagefolderid.colToIndex()]
+            show.allowNFS = d[cfeConfigSchema.allownfs.colToIndex()]
+            show.payFeeOnly = d[cfeConfigSchema.payfeeonly.colToIndex()]
+            show.purchaseLimit = d[cfeConfigSchema.purchaselimit.colToIndex()]
+            show.showopen = d[cfeConfigSchema.showopendate.colToIndex()]
+            show.showclose = d[cfeConfigSchema.showclosedate.colToIndex()]
+            show.registrationLink = d[cfeConfigSchema.registrationlink.colToIndex()]
         } 
     }
     return show;
@@ -128,10 +129,9 @@ function getShowName(id) {
  * @returns {array} All unique show identifiers
  */
 function getAllShowIds() {
-    let allShows = getAllShows()
-    let showids = allShows.map(s => s[0]);
+    const allShows = getAllShows()
+    return allShows.map(s => s[0]);
 
-    return showids;
 }
 
 /**
@@ -140,10 +140,12 @@ function getAllShowIds() {
  * @returns {number} Max entries
  */
 function getMaxEntriesPerShow(id) {
+    // Ensure a number is returned if missing
     let max = 0;
-    let maxEntriesPerShow = getShow(id).maxEntriesPerShow;
+    const show = getShow(id)
+    const maxEntriesPerShow = show.maxEntriesPerShow;
     if (maxEntriesPerShow) {
-        max = maxEntriesPerShow;
+        max = parseInt(maxEntriesPerShow);
     }
     return max;
 }
@@ -154,8 +156,8 @@ function getMaxEntriesPerShow(id) {
  * @returns {number} Max artist entries
  */
 function getMaxEntriesPerArtist(id) {
-    let max = getShow(id).maxEntriesPerArtist;
-    return max;
+    const show = getShow(id) 
+    return show.maxEntriesPerArtist;
 }
 
 /** 
@@ -164,9 +166,7 @@ function getMaxEntriesPerArtist(id) {
  * @returns {boolean} yes/no
  */
 function getPayFeeOnly(id) {
-    let pfo = getShow(id).payFeeOnly;
-    return pfo;
-
+    return getShow(id).payFeeOnly;
 }
 
 /**
@@ -174,20 +174,25 @@ function getPayFeeOnly(id) {
  * @returns {array} a list of all open shows
  */
 function getAllOpenShows() {
-    let data = getAllShows()
+    const cfeTables = getCFETables()
+    const cfeConfigSchema = cfeTables.config.schema
     // schema defines fields by column letter, need to convert to a zero based integer for array access
-    let statusPos = (CFE_TABLES.config.schema.status).toUpperCase().charCodeAt(0) - 65 // ascii code for uppercase A
-    let openShows = data.filter(d  => d[statusPos] === "OPEN" )
+    const statusPos = (cfeConfigSchema.status).toUpperCase().charCodeAt(0) - 65 // ascii code for uppercase A
+    const data = getAllShows()
+    return data.filter(d  => d[statusPos] === "OPEN" )
 
-    return openShows
 }
 
 function getAllShows() {
-    let cfeConfig = CFE_DB.getSheetByName(CFE_TABLES.config.name)
-    let startRow = CFE_TABLES.config.headers + 1
-    let startCol = 1
-    let data = cfeConfig
-        .getRange(startRow, startCol, cfeConfig.getLastRow() - CFE_TABLES.config.headers, cfeConfig.getLastColumn())
+    const cfeTables = getCFETables()
+    const cfeConfig = connect(CFE_ID).getSheetByName(cfeTables.config.name)
+    const startRow = cfeTables.config.headers + 1
+    const startCol = 1
+    const data = cfeConfig
+        .getRange(startRow, 
+                startCol, 
+                cfeConfig.getLastRow() - startRow, 
+                cfeConfig.getLastColumn())
         .getDisplayValues()
 
     return data
@@ -199,8 +204,13 @@ function getAllShows() {
  * @returns {string} show id
  */
 function getShowIdByName(name) {
-    let data = getAllShows()
-    let showId = data.filter( d => d[1] === name)
+    const cfeTables = getCFETables()
+    const cfeConfigSchema = cfeTables.config.schema
+    // schema defines fields by column letter, need to convert to a zero based integer for array access
+    const namePos = (cfeConfigSchema.exhibitname).toUpperCase().charCodeAt(0) - 65 // ascii code for uppercase A
+    const idPos = (cfeConfigSchema.showid).toUpperCase().charCodeAt(0) - 65
+    const data = getAllShows()
+    const showId = data.filter( d => d[namePos] === name)
 
-    return showId[0][0]
+    return showId[0][idPos]
 }
