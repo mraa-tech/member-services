@@ -1,3 +1,4 @@
+// Test create a object to see if GAS supports this
 class Show {
     constructor(id) {
         this.id = id        

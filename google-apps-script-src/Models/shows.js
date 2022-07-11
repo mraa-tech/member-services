@@ -214,8 +214,6 @@ function getShowIdByName(name) {
     return showId[0][idPos]
 }
 
-// =====Moved From Submissions================================================================
-// Todo refactor using new data structure
 /**
  * Get total entries for the event from the pivot table
  * @param {string}  Id
@@ -266,7 +264,6 @@ function getShowIdByName(name) {
                 cfeTitleCounts.getLastColumn())
         .getValues()
     let totalByEventArtist = 0;
-    //let data = dataCountsSheet.getRange(CountsRangeMap.eventArtistCounts+dataCountsSheet.getLastRow()).getValues();
     let evtCount = data.filter(function(r) {
         return r[titlePos].toLowerCase() === evtTitle.toLowerCase() && r[emailPos].toLowerCase() === email.toLowerCase();
     })
@@ -293,7 +290,6 @@ function getShowIdByName(name) {
                 1)
         .getDisplayValues()
 
-    //let data = dataExhibitSheet.getRange(2, DataColMap.event_title, dataExhibitSheet.getLastRow()-1, 1).getValues();
     const filteredData = data.map( d => d[0])
     const uniqueEvents = [... new Set(filteredData)]
 
@@ -318,7 +314,6 @@ function getShowIdByName(name) {
                 cfeExhibits.getLastRow() - startRow, 
                 cfeExhibits.getLastColumn())
         .getDisplayValues()
-    // let data = dataExhibitSheet.getRange(2, DataColMap.event_id, dataExhibitSheet.getLastRow()-1, DataColMap.fileId).getValues();
     let filteredData = data.filter( d => d[idPos] === id)
     
     return filteredData
@@ -345,7 +340,6 @@ function getShowIdByName(name) {
                 cfeExhibits.getLastRow() - startRow, 
                 cfeExhibits.getLastColumn())
         .getDisplayValues()
-    //let data = dataExhibitSheet.getRange(2, 1, dataExhibitSheet.getLastRow(), DataColMap.fileName).getValues();
     const uploads = data.filter(r => 
             (r[titlePos].toLowerCase() === evtTitle.toLowerCase() && 
              r[emailPos].toLowerCase() === email.toLowerCase())
@@ -378,7 +372,6 @@ function getShowIdByName(name) {
                 cfeExhibits.getLastRow() - startRow, 
                 cfeExhibits.getLastColumn())
         .getDisplayValues()
-    //let data = dataExhibitSheet.getRange(2, 1, dataExhibitSheet.getLastRow(), DataColMap.fileName).getValues();
     const uploads = data.filter(r =>
         (r[idPos].toLowerCase() === id.toLowerCase() && 
          r[emailPos].toLowerCase() === email.toLowerCase())
