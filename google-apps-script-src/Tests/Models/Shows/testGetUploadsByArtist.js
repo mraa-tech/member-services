@@ -1,6 +1,6 @@
 function testGetUploadsByArtist() {
-    const evtTitle = "Test Upload Feedback"
-    const email = "jamesgreen.311@gmail.com"
+    const evtTitle = "KIND OF BLUE at GLEN ALLEN"
+    const email = "bowles3@gmail.com"
 
     let uploads = getUploadsByArtist(evtTitle, email)
 

@@ -1,6 +1,11 @@
-function testGetSubmissionsById1(id, verbose) {
+function testGetSubmissionsByIdRunAll() {
+    const array = []
+    testGetSubmissionsById1(typeof array, true)
+}
+
+function testGetSubmissionsById1(expected, verbose) {
+    const id = "2D0CDBE"
     let submissions = getSubmissionsById(id) 
-    let expected = 'object'
     let t = 1
 
     if (verbose) {
@@ -8,9 +13,12 @@ function testGetSubmissionsById1(id, verbose) {
         console.log(submissions)
     }
 
-    return console.log((typeof submissions === expected) ? "test %s pass" : "test %s fail", t)
+
+    if (typeof submissions === expected) {
+        console.log("Test %s pass", t)
+    } else {
+        console.error("Test %s fail", t)
+    }
+    return
 }
 
-function testGetSubmissionsByIdRunAll() {
-    testGetSubmissionsById1('2D0CDBE', true)
-}

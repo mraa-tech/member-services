@@ -299,3 +299,89 @@ function getShowIdByName(name) {
 
     return uniqueEvents
 }
+
+/**
+ * Get all submissions for an event
+ * @param {string} id Event Id
+ * @returns {array} all submissions
+ */
+ function getSubmissionsById(id) {
+    const cfeTables = getCFETables()
+    const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+    const cfeExhibitsSchema = cfeTables.exhibits.schema
+    const startRow = cfeTables.exhibits.headers + 1
+    const startCol = 1
+    const idPos = cfeExhibitsSchema.eventid.colToIndex()
+    const data = cfeExhibits
+        .getRange(startRow, 
+                startCol, 
+                cfeExhibits.getLastRow() - startRow, 
+                cfeExhibits.getLastColumn())
+        .getDisplayValues()
+    // let data = dataExhibitSheet.getRange(2, DataColMap.event_id, dataExhibitSheet.getLastRow()-1, DataColMap.fileId).getValues();
+    let filteredData = data.filter( d => d[idPos] === id)
+    
+    return filteredData
+}
+
+/**
+ * Get all uploads for an event (by title) for an artist
+ * @param {string} evtTitle Event Title
+ * @param {string} email Artist Email
+ * @returns {string}
+ */
+ function getUploadsByArtist(evtTitle, email) {
+    const cfeTables = getCFETables()
+    const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+    const cfeExhibitsSchema = cfeTables.exhibits.schema
+    const startRow = cfeTables.exhibits.headers + 1
+    const startCol = 1
+    const titlePos = cfeExhibitsSchema.eventtitle.colToIndex()
+    const emailPos = cfeExhibitsSchema.email.colToIndex()
+    const filenamePos = cfeExhibitsSchema.filename.colToIndex()
+    const data = cfeExhibits
+        .getRange(startRow, 
+                startCol, 
+                cfeExhibits.getLastRow() - startRow, 
+                cfeExhibits.getLastColumn())
+        .getDisplayValues()
+    //let data = dataExhibitSheet.getRange(2, 1, dataExhibitSheet.getLastRow(), DataColMap.fileName).getValues();
+    const uploads = data.filter(r => 
+            (r[titlePos].toLowerCase() === evtTitle.toLowerCase() && 
+             r[emailPos].toLowerCase() === email.toLowerCase())
+    )
+
+    return (uploads.map( r => r[filenamePos]).join())
+
+    // stringify not working as intended when passed back to the client
+    //return JSON.stringify(uploads.map(r => r[DataColMap.fileName-1]))
+}
+
+/**
+ * Get uploads for an event (by id) for an artist
+ * @param {string} id Event Id
+ * @param {string} email Artist Email
+ * @returns {string}
+ */
+ function getUploadsByIdByArtist(id, email) {
+    const cfeTables = getCFETables()
+    const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+    const cfeExhibitsSchema = cfeTables.exhibits.schema
+    const startRow = cfeTables.exhibits.headers + 1
+    const startCol = 1
+    const idPos = cfeExhibitsSchema.eventid.colToIndex()
+    const emailPos = cfeExhibitsSchema.email.colToIndex()
+    const filenamePos = cfeExhibitsSchema.filename.colToIndex()
+    const data = cfeExhibits
+        .getRange(startRow, 
+                startCol, 
+                cfeExhibits.getLastRow() - startRow, 
+                cfeExhibits.getLastColumn())
+        .getDisplayValues()
+    //let data = dataExhibitSheet.getRange(2, 1, dataExhibitSheet.getLastRow(), DataColMap.fileName).getValues();
+    const uploads = data.filter(r =>
+        (r[idPos].toLowerCase() === id.toLowerCase() && 
+         r[emailPos].toLowerCase() === email.toLowerCase())
+    )
+    return JSON.stringify(uploads.map(r => r[filenamePos]))
+}

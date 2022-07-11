@@ -1,9 +1,8 @@
 function testGetUploadsByIdByArtist() {
-    const evtTitle = "Test Upload Feedback"
-    const evtId = "2F83B9D"
-    const email = "jamesgreen.311@gmail.com"
+    const id = "2D0CDBE"
+    const email = "bowles3@gmail.com"
 
-    let uploads = getUploadsByIdByArtist(evtId, email)
+    let uploads = getUploadsByIdByArtist(id, email)
 
     console.log(uploads)
     return 
