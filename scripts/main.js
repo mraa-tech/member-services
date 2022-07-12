@@ -181,11 +181,10 @@ function showCurrentCallsUploads(arr) {
         ele.innerHTML = "No open calls"
     } else {
         //build table
-        let table = document.createElement("table")
-        table.classList.add("table", "table-borderless")
-        let row = document.createElement("tr")
-        let hdr1 = document.createElement("th")
-        let hdr2 = document.createElement("th")
+        const table = document.createElement("table")
+        const row = document.createElement("tr")
+        const hdr1 = document.createElement("th")
+        const hdr2 = document.createElement("th")
 
         hdr1.innerText = "Name"
         hdr2.innerText = "Entries"
@@ -201,7 +200,8 @@ function showCurrentCallsUploads(arr) {
             row.append(col1, col2)
             table.append(row) 
         }
-        ele.append(table)        
+        ele.append(table)       
+        table.classList.add("table", "table-borderless") 
     }
 
 }
@@ -214,19 +214,22 @@ function showArtistsPerShowHistory(arr) {
         ele.innerHTML = "No history"
     } else {
         //build table
-        let table = document.createElement("table")
-        table.classList.add("table", "table-striped")
-        let row = document.createElement("tr")
-        let hdr1 = document.createElement("th")
-        let hdr2 = document.createElement("th")
-        let hdr3 = document.createElement("th")
+        const table = document.createElement("table")
+        const thead = document.createElement("thead")
+        const tbody = document.createElement("tbody")
+
+        const row = document.createElement("tr")
+        const hdr1 = document.createElement("th")
+        const hdr2 = document.createElement("th")
+        const hdr3 = document.createElement("th")
 
         hdr1.innerText = "Year"
         hdr2.innerText = "Name"
         hdr3.innerText = "Artists"
         row.append(hdr1, hdr2, hdr3)
-        table.append(row)
-        
+        thead.append(row)
+        table.append(thead)
+
         for (let i=0; i<arr.length; i++) {
             let row = document.createElement("tr")
             let col1 = document.createElement("td")
@@ -236,9 +239,11 @@ function showArtistsPerShowHistory(arr) {
             col2.innerText = arr[i][1]
             col3.innerText = arr[i][2]
             row.append(col1, col2, col3)
-            table.append(row) 
+            tbody.append(row) 
         }
-        ele.append(table)        
+        table.append(tbody)
+        ele.append(table)  
+        table.classList.add("table", "table-striped")      
     }
 }
 
