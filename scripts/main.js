@@ -3,9 +3,9 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
-// Endpoint => MRAA Member Services Project, latest version 6
+// Endpoint => MRAA Member Services Project, latest version 7
 const EP_MEMBERS_SERVICES =
-    "https://script.google.com/macros/s/AKfycbxs6TnMuk8JvjF0shqi6PnZXWt-X7XnWXs402za0LDiUh9_8nCWW050N_rG7RG-5fJq/exec" +
+    "https://script.google.com/macros/s/AKfycbwnMtXKwU1l-EEStgH5xmrNZzx0P8zegeB-Fcq0WN3BHd34E7URuHv5xRbxuASCZ-5X5w/exec" +
     "?q="
 
 var totalMembers = 0
@@ -76,9 +76,18 @@ function fetchCurrentExhibitions() {
     .then(resp => resp.json())
     .then(resp => {
         t = resp
-        showCurrentExhibitions(t)
+        showCurrentExhibitions(resp)
     })
     .catch()
+}
+
+function fetchCurrentCallsUploads() {
+    const url = EP_MEMBERS_SERVICES + "currentcallsuploads"
+    fetch(url) 
+    .then(resp => resp.json()
+    .then(resp => {
+        showCurrentCallsUploads(resp)
+    }))
 }
 
 function fetchMemberCounts() {
@@ -152,10 +161,43 @@ function showCurrentExhibitions(arr) {
         ele.appendChild(table)        
     }
 
-
     return
+}
+
+function showCurrentCallsUploads(arr) {
+    const ele = document.getElementById("currentexhibitions")
+    document.getElementById("loadingcurrentexhibitions").remove()
+
+    if (arr.length<=0) {
+        ele.innerHTML = "No open calls"
+    } else {
+        //build table
+        let table = document.createElement("table")
+        table.classList.add("table", "table-borderless")
+        let row = document.createElement("tr")
+        let hdr1 = document.createElement("th")
+        let hdr2 = document.createElement("th")
+
+        hdr1.innerText = "Name"
+        hdr2.innerText = "Entries"
+        row.append(hdr1, hdr2)
+        table.append(row)
+        
+        for (let i=0; i<arr.length; i++) {
+            let row = document.createElement("tr")
+            let col1 = document.createElement("td")
+            let col2 = document.createElement("td")
+            col1.innerText = arr[i][1]
+            col2.innerText = arr[i][2]
+            row.append(col1, col2)
+            table.append(row) 
+        }
+        ele.append(table)        
+    }
+
 }
 
 document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
-document.addEventListener("DOMContentLoaded", fetchCurrentExhibitions)
+//document.addEventListener("DOMContentLoaded", fetchCurrentExhibitions)
+document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)

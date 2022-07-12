@@ -46,14 +46,15 @@ function getCFETables() {
                 "count" : "c",
             },
         },
-        "countsbytitle" : {
+        "countsbyid" : {
             "name" : "Counts By Id",
             "type" : "pivot",
             "headers" : 1,
             "summary" : "Grand Total",
             "schema" : {
                 "id" : "a",
-                "count" : "b",
+                "title" : "b",
+                "count" : "c",
             },
         },
         "config" : {
@@ -287,7 +288,8 @@ function getShowIdByName(name) {
         .getRange(startRow, 
                 startCol, 
                 cfeExhibits.getLastRow() - startRow, 
-                1)
+                1
+                )
         .getDisplayValues()
 
     const filteredData = data.map( d => d[0])
@@ -296,6 +298,26 @@ function getShowIdByName(name) {
     return uniqueEvents
 }
 
+function getCurrentCallsUploads() {
+    const cfeTables = getCFETables()
+    const cfeCountsById = connect(CFE_ID).getSheetByName(cfeTables.countsbyid.name)
+    const cfeCountsByIdSchema = cfeTables.countsbyid.schema
+    const startRow = cfeTables.countsbyid.headers + 1
+    const startCol = 1
+    const data = cfeCountsById
+        .getRange(startRow,
+            startCol,
+            cfeCountsById.getLastRow() - startRow,
+            cfeCountsById.getLastColumn()
+            )
+        .getDisplayValues()
+    const isSummary = (cfeCountsById.summary && cfeCountsById.summary !== "none")
+    if (isSummary) {
+        // remove summary row, it will always be the last row
+        data.pop()
+    }
+    return data
+}
 /**
  * Get all submissions for an event
  * @param {string} id Event Id
