@@ -16,6 +16,7 @@ ROUTES.path("totalpendingmembers", getTotalPendingMembersResponse)
 ROUTES.path("totalduespaid", getTotalDuesPaidResponse)
 ROUTES.path("currentexhibitions", getCurrentCallsResponse)
 ROUTES.path("currentcallsuploads", getCurrentCallsUploadsResponse)
+ROUTES.path("artistspershowhistory", retrieveArtistsPerShowResponse)
 
 function doGet(e) {
     let result = route(e.parameter['q'])
@@ -81,4 +82,8 @@ function getCurrentCallsResponse() {
 
 function getCurrentCallsUploadsResponse() {
     return getCurrentCallsUploads()
+}
+
+function retrieveArtistsPerShowResponse() {
+    return retrieveArtistsPerShow()
 }

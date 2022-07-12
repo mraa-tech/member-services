@@ -3,9 +3,9 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
-// Endpoint => MRAA Member Services Project, latest version 7
+// Endpoint => MRAA Member Services Project, latest version 10
 const EP_MEMBERS_SERVICES =
-    "https://script.google.com/macros/s/AKfycbwnMtXKwU1l-EEStgH5xmrNZzx0P8zegeB-Fcq0WN3BHd34E7URuHv5xRbxuASCZ-5X5w/exec" +
+    "https://script.google.com/macros/s/AKfycbyOHGym-4JEvdpfN4PDA07iawKq9EH61v-764eZj-VYwR0uwsxXfGTaC_0li7B32108Fw/exec" +
     "?q="
 
 var totalMembers = 0
@@ -87,6 +87,15 @@ function fetchCurrentCallsUploads() {
     .then(resp => resp.json()
     .then(resp => {
         showCurrentCallsUploads(resp)
+    }))
+}
+
+function fetchArtistsPerShowHistory() {
+    const url = EP_MEMBERS_SERVICES + "artistspershowhistory"
+    fetch(url) 
+    .then(resp => resp.json()
+    .then(resp => {
+        showArtistsPerShowHistory(resp)
     }))
 }
 
@@ -197,7 +206,44 @@ function showCurrentCallsUploads(arr) {
 
 }
 
+function showArtistsPerShowHistory(arr) {
+    const ele = document.getElementById("artistpershowhistory")
+    document.getElementById("loadingartistspershow").remove()
+
+    if (arr.length<=0) {
+        ele.innerHTML = "No history"
+    } else {
+        //build table
+        let table = document.createElement("table")
+        table.classList.add("table", "table-striped")
+        let row = document.createElement("tr")
+        let hdr1 = document.createElement("th")
+        let hdr2 = document.createElement("th")
+        let hdr3 = document.createElement("th")
+
+        hdr1.innerText = "Year"
+        hdr2.innerText = "Name"
+        hdr3.innerText = "Artists"
+        row.append(hdr1, hdr2, hdr3)
+        table.append(row)
+        
+        for (let i=0; i<arr.length; i++) {
+            let row = document.createElement("tr")
+            let col1 = document.createElement("td")
+            let col2 = document.createElement("td")
+            let col3 = document.createElement("td")
+            col1.innerText = arr[i][0]
+            col2.innerText = arr[i][1]
+            col3.innerText = arr[i][2]
+            row.append(col1, col2, col3)
+            table.append(row) 
+        }
+        ele.append(table)        
+    }
+}
+
 document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
 //document.addEventListener("DOMContentLoaded", fetchCurrentExhibitions)
 document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)
+document.addEventListener("DOMContentLoaded", fetchArtistsPerShowHistory)
