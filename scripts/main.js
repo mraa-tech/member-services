@@ -3,9 +3,9 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
-// Endpoint => MRAA Member Services Project, latest version 10
+// Endpoint => MRAA Member Services Project, latest version 12
 const EP_MEMBERS_SERVICES =
-    "https://script.google.com/macros/s/AKfycbyOHGym-4JEvdpfN4PDA07iawKq9EH61v-764eZj-VYwR0uwsxXfGTaC_0li7B32108Fw/exec" +
+    "https://script.google.com/macros/s/AKfycbz43Xjh6Uu0V_j1MnAJC9XaQuKWakrVnw2zO4U3hZ9C5G4lv9nsfl3X7nblpN0yvkMxHg/exec" +
     "?q="
 
 var totalMembers = 0
@@ -96,6 +96,15 @@ function fetchArtistsPerShowHistory() {
     .then(resp => resp.json()
     .then(resp => {
         showArtistsPerShowHistory(resp)
+    }))
+}
+
+function fetchEventArtistEntries() {
+    const url = EP_MEMBERS_SERVICES + "eventartistentries"
+    fetch(url)
+    .then(resp => resp.json()
+    .then(resp => {
+        showEventArtistEntries(resp)
     }))
 }
 
@@ -247,8 +256,54 @@ function showArtistsPerShowHistory(arr) {
     }
 }
 
+function showEventArtistEntries(arr) {
+    const ele = document.getElementById("entriesamountdue")
+    document.getElementById("loadingentriesamountdue").remove()
+
+    if (arr.length<=0) {
+        ele.innerHTML = "No open shows"
+    } else {
+        //build table
+        const table = document.createElement("table")
+        const thead = document.createElement("thead")
+        const tbody = document.createElement("tbody")
+
+        const row = document.createElement("tr")
+        const hdr1 = document.createElement("th")
+        const hdr2 = document.createElement("th")
+        const hdr3 = document.createElement("th")
+        const hdr4 = document.createElement("th")
+
+        hdr1.innerText = "Exhibit"
+        hdr2.innerText = "Artist"
+        hdr3.innerText = "Entries"
+        hdr4.innerText = "Amount Due"
+        row.append(hdr1, hdr2, hdr3, hdr4)
+        thead.append(row)
+        table.append(thead)
+
+        for (let i=0; i<arr.length; i++) {
+            let row = document.createElement("tr")
+            let col1 = document.createElement("td")
+            let col2 = document.createElement("td")
+            let col3 = document.createElement("td")
+            let col4 = document.createElement("td")
+            col1.innerText = arr[i][0]
+            col2.innerText = arr[i][3]
+            col3.innerText = arr[i][4]
+            col4.innerText = "$" + arr[i][5]
+            row.append(col1, col2, col3, col4)
+            tbody.append(row) 
+        }
+        table.append(tbody)
+        ele.append(table)  
+        table.classList.add("table", "table-success", "table-striped")      
+    }
+}
+
 document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
 //document.addEventListener("DOMContentLoaded", fetchCurrentExhibitions)
 document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)
 document.addEventListener("DOMContentLoaded", fetchArtistsPerShowHistory)
+document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)

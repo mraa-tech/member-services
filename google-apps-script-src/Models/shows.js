@@ -21,7 +21,8 @@ function getCFETables() {
                 "member" : "n",
                 "availablity" : "o", // not currently used
                 "hidden" : "p", // not currently used
-                "timestamp" : "q"
+                "fullname" : "q", // not currently used
+                "timestamp" : "r" // not currently used
             },
         },
         "countsbytitleartist" : {
@@ -31,8 +32,10 @@ function getCFETables() {
             "summary" : "Grand Total",
             "schema" : {
                 "title" : "a",
-                "email" : "b",
-                "count" : "c",
+                "id" : "b",
+                "email" : "c",
+                "artistname" : "d",
+                "entries" : "e",
             },
         },
         "countsbyartisttitle" : {
@@ -75,7 +78,8 @@ function getCFETables() {
                 "purchaselimit": "k",
                 "showopendate" : "l",
                 "showclosedate" : "m",
-                "registrationlink": "n"
+                "entryfee" : "n",
+                "registrationlink": "o"
             },
         }
     
@@ -109,6 +113,7 @@ function getShow(id) {
             show.purchaseLimit = d[cfeConfigSchema.purchaselimit.colToIndex()]
             show.showopen = d[cfeConfigSchema.showopendate.colToIndex()]
             show.showclose = d[cfeConfigSchema.showclosedate.colToIndex()]
+            show.entryfee = d[cfeConfigSchema.entryfee.colToIndex()]
             show.registrationLink = d[cfeConfigSchema.registrationlink.colToIndex()]
         } 
     }
@@ -399,4 +404,32 @@ function getCurrentCallsUploads() {
          r[emailPos].toLowerCase() === email.toLowerCase())
     )
     return JSON.stringify(uploads.map(r => r[filenamePos]))
+}
+
+function getEventArtistEntries() {
+    const cfeTables = getCFETables()
+    const cfeEntries = connect(CFE_ID).getSheetByName(cfeTables.countsbytitleartist.name)
+    const cfeCountsSchema = cfeTables.countsbytitleartist.schema
+    const idPos = cfeCountsSchema.id.colToIndex()
+    const startRow = cfeTables.countsbytitleartist.headers + 1
+    const startCol = 1
+    const summary = cfeTables.countsbytitleartist.summary
+    const data = cfeEntries
+        .getRange(startRow,
+            startCol,
+            cfeEntries.getLastRow() - startRow,
+            cfeEntries.getLastColumn())
+        .getDisplayValues()
+    const fee = getEntryFee(data[0][idPos])
+
+    let newData = []
+    for (let row = 0; row < data.length; row++) {
+        newData.push([...data[row], data[row][4]*fee])
+    }
+    return newData
+}
+
+function getEntryFee(id) {
+    const show = getShow(id)
+    return parseInt(show.entryfee)
 }

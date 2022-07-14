@@ -13,7 +13,7 @@ function testShowObj() {
     console.log(`Show: ${show.name}, Id: ${show.id}, Max Artist Entries: ${show.maxEntriesPerArtist}`);
 }
 
-function testRetrieveShow() {
+function testGetShow() {
     console.log(getShow(showId));
 }
 

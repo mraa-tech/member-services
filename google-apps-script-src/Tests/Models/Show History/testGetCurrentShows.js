@@ -1,9 +1,9 @@
-function testRetrieveCurrentShowsRunAll() {
-    testRetrieveCurrentShows1(null, true)
+function testGetCurrentShowsRunAll() {
+    testGetCurrentShows1(null, true)
 }
 
-function testRetrieveCurrentShows1(expected, verbose) {
-    let d = retrieveCurrentShows()
+function testGetCurrentShows1(expected, verbose) {
+    let d = getCurrentShows()
     let t = 1
     
     if (verbose) {

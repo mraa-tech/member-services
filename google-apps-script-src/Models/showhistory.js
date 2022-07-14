@@ -30,7 +30,7 @@ function getShowHistoryTables() {
     }
 }
 
-function retrieveCurrentShows() {
+function getCurrentShows() {
     const year = new Date().getFullYear()
     const tables = getShowHistoryTables()
     const tableName = tables.participants.name
@@ -51,7 +51,7 @@ function retrieveCurrentShows() {
     return currentData
 }
 
-function retrieveArtistsPerShow() {
+function getArtistsPerShow() {
     const tables = getShowHistoryTables()
     const tableName = tables.artistpershow.name
     const historyTable = connect(EXHIBITION_HISTORY_ID).getSheetByName(tableName)
