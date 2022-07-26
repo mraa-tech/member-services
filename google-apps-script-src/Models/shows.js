@@ -309,18 +309,26 @@ function getCurrentCallsUploads() {
     const cfeCountsByIdSchema = cfeTables.countsbyid.schema
     const startRow = cfeTables.countsbyid.headers + 1
     const startCol = 1
-    const data = cfeCountsById
-        .getRange(startRow,
-            startCol,
-            cfeCountsById.getLastRow() - startRow,
-            cfeCountsById.getLastColumn()
-            )
-        .getDisplayValues()
-    const isSummary = (cfeCountsById.summary && cfeCountsById.summary !== "none")
-    if (isSummary) {
-        // remove summary row, it will always be the last row
-        data.pop()
+    const dataRows = cfeCountsById.getLastRow() - startRow
+    const isSummary = (cfeTables.countsbyid.summary && cfeTables.countsbyid.summary !== "none")
+
+    let data = []
+
+    if (dataRows > 0) {
+        data = cfeCountsById
+            .getRange(startRow,
+                startCol,
+                cfeCountsById.getLastRow() - startRow,
+                cfeCountsById.getLastColumn()
+                )
+            .getDisplayValues()
+    
+        if (isSummary) {
+            // remove summary row, it will always be the last row
+            data.pop()
+        }    
     }
+
     return data
 }
 /**
@@ -414,18 +422,25 @@ function getEventArtistEntries() {
     const startRow = cfeTables.countsbytitleartist.headers + 1
     const startCol = 1
     const summary = cfeTables.countsbytitleartist.summary
-    const data = cfeEntries
+    const dataRows = cfeEntries.getLastRow() - startRow 
+
+    let data = []
+    let fee = 0
+    let newData = []
+    if (dataRows > 0) {
+        data = cfeEntries
         .getRange(startRow,
             startCol,
             cfeEntries.getLastRow() - startRow,
             cfeEntries.getLastColumn())
         .getDisplayValues()
-    const fee = getEntryFee(data[0][idPos])
+        fee = getEntryFee(data[0][idPos])
 
-    let newData = []
-    for (let row = 0; row < data.length; row++) {
-        newData.push([...data[row], data[row][4]*fee])
+        for (let row = 0; row < data.length; row++) {
+            newData.push([...data[row], data[row][4]*fee])
+        }        
     }
+
     return newData
 }
 
