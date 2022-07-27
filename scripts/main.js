@@ -261,7 +261,7 @@ function showEventArtistEntries(arr) {
     document.getElementById("loadingentriesamountdue").remove()
 
     if (arr.length<=0) {
-        ele.innerHTML = "No open shows"
+        ele.innerHTML = "No open calls for entry"
     } else {
         //build table
         const table = document.createElement("table")
