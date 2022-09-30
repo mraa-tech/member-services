@@ -30,6 +30,7 @@ function getCFETables() {
             "type" : "pivot",
             "headers" : 1,
             "summary" : "Grand Total",
+            "footers": 1,
             "schema" : {
                 "title" : "a",
                 "id" : "b",
@@ -54,6 +55,7 @@ function getCFETables() {
             "type" : "pivot",
             "headers" : 1,
             "summary" : "Grand Total",
+            "footers" : 1,
             "schema" : {
                 "id" : "a",
                 "title" : "b",
@@ -193,12 +195,13 @@ function getAllOpenShows() {
 function getAllShows() {
     const cfeTables = getCFETables()
     const cfeConfig = connect(CFE_ID).getSheetByName(cfeTables.config.name)
-    const startRow = cfeTables.config.headers + 1
+    const headers = cfeTables.config.headers
+    const startRow = headers + 1
     const startCol = 1
     const data = cfeConfig
         .getRange(startRow, 
                 startCol, 
-                cfeConfig.getLastRow() - startRow, 
+                cfeConfig.getLastRow() - headers, 
                 cfeConfig.getLastColumn())
         .getDisplayValues()
 
@@ -421,10 +424,12 @@ function getEventArtistEntries() {
     const cfeEntries = connect(CFE_ID).getSheetByName(cfeTables.countsbytitleartist.name)
     const cfeCountsSchema = cfeTables.countsbytitleartist.schema
     const idPos = cfeCountsSchema.id.colToIndex()
-    const startRow = cfeTables.countsbytitleartist.headers + 1
+    const headers = cfeTables.countsbytitleartist.headers
+    const startRow = headers + 1
     const startCol = 1
     const summary = cfeTables.countsbytitleartist.summary
-    const dataRows = cfeEntries.getLastRow() - startRow 
+    const footers = cfeTables.countsbytitleartist.footers
+    const dataRows = cfeEntries.getLastRow() - headers - footers
 
     let data = []
     let fee = 0
@@ -433,13 +438,18 @@ function getEventArtistEntries() {
         data = cfeEntries
         .getRange(startRow,
             startCol,
-            cfeEntries.getLastRow() - startRow,
+            dataRows,
             cfeEntries.getLastColumn())
         .getDisplayValues()
         fee = getFee(data[0][idPos])
 
         for (let row = 0; row < data.length; row++) {
-            newData.push([...data[row], data[row][4]*fee])
+            if (fee>0) {
+                newData.push([...data[row], data[row][4]*fee])
+            } else {
+                newData.push([...data[row], Math.abs(fee)])
+            }
+
         }        
     }
 
@@ -448,6 +458,8 @@ function getEventArtistEntries() {
 
 function getFee(id) {
     const show = getShow(id)
-    const fee = show.entryfee===0? show.showfee: show.entryfee
-    return parseInt(fee)
+    const fee = parseInt(show.entryfee)===0? parseInt(show.showfee)*-1: parseInt(show.entryfee)
+    // return show fee as negative as indicator that it's not an entry fee
+    // TODO: refactor show fee indicator
+    return fee
 }
