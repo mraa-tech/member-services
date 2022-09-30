@@ -259,6 +259,7 @@ function showArtistsPerShowHistory(arr) {
 function showEventArtistEntries(arr) {
     const ele = document.getElementById("entriesamountdue")
     document.getElementById("loadingentriesamountdue").remove()
+    const headers = ["Exhibit", "Artist", "Entries", "Amount Due"]
 
     if (arr.length<=0) {
         ele.innerHTML = "No open calls for entry"
@@ -267,6 +268,7 @@ function showEventArtistEntries(arr) {
         const table = document.createElement("table")
         const thead = document.createElement("thead")
         const tbody = document.createElement("tbody")
+        const tfooter = document.createElement("tfoot")
 
         const row = document.createElement("tr")
         const hdr1 = document.createElement("th")
@@ -282,6 +284,7 @@ function showEventArtistEntries(arr) {
         thead.append(row)
         table.append(thead)
 
+        let feeTotal = 0
         for (let i=0; i<arr.length; i++) {
             let row = document.createElement("tr")
             let col1 = document.createElement("td")
@@ -292,10 +295,19 @@ function showEventArtistEntries(arr) {
             col2.innerText = arr[i][3]
             col3.innerText = arr[i][4]
             col4.innerText = "$" + arr[i][5]
+            feeTotal += parseInt(arr[i][5])
             row.append(col1, col2, col3, col4)
             tbody.append(row) 
         }
+        const footers = ["Total", "", "", "$" + feeTotal]
+        const footerRow = tfooter.insertRow()
+        footers.forEach(footer => {
+            let f = document.createElement("th")
+            f.innerText = footer
+            footerRow.append(f)
+        })
         table.append(tbody)
+        table.append(tfooter)
         ele.append(table)  
         table.classList.add("table", "table-success", "table-striped")      
     }
