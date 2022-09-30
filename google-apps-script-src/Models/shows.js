@@ -79,7 +79,8 @@ function getCFETables() {
                 "showopendate" : "l",
                 "showclosedate" : "m",
                 "entryfee" : "n",
-                "registrationlink": "o"
+                "registrationlink": "o",
+                "showfee": "s"
             },
         }
     
@@ -115,6 +116,7 @@ function getShow(id) {
             show.showclose = d[cfeConfigSchema.showclosedate.colToIndex()]
             show.entryfee = d[cfeConfigSchema.entryfee.colToIndex()]
             show.registrationLink = d[cfeConfigSchema.registrationlink.colToIndex()]
+            show.showfee = d[cfeConfigSchema.showfee.colToIndex()]
         } 
     }
     return show
@@ -434,7 +436,7 @@ function getEventArtistEntries() {
             cfeEntries.getLastRow() - startRow,
             cfeEntries.getLastColumn())
         .getDisplayValues()
-        fee = getEntryFee(data[0][idPos])
+        fee = getFee(data[0][idPos])
 
         for (let row = 0; row < data.length; row++) {
             newData.push([...data[row], data[row][4]*fee])
@@ -444,7 +446,8 @@ function getEventArtistEntries() {
     return newData
 }
 
-function getEntryFee(id) {
+function getFee(id) {
     const show = getShow(id)
-    return parseInt(show.entryfee)
+    const fee = show.entryfee===0? show.showfee: show.entryfee
+    return parseInt(fee)
 }
