@@ -292,12 +292,13 @@ function getShowIdByName(name) {
     const cfeTables = getCFETables()
     const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
     const cfeExhibitsSchema = cfeTables.exhibits.schema
-    const startRow = cfeTables.exhibits.headers + 1
+    const headers = cfeTables.exhibits.headers
+    const startRow = headers + 1
     const startCol = cfeExhibitsSchema.eventtitle.colToIndex() + 1
     const data = cfeExhibits
         .getRange(startRow, 
                 startCol, 
-                cfeExhibits.getLastRow() - startRow, 
+                cfeExhibits.getLastRow() - headers, 
                 1
                 )
         .getDisplayValues()
@@ -312,7 +313,8 @@ function getCurrentCallsUploads() {
     const cfeTables = getCFETables()
     const cfeCountsById = connect(CFE_ID).getSheetByName(cfeTables.countsbyid.name)
     const cfeCountsByIdSchema = cfeTables.countsbyid.schema
-    const startRow = cfeTables.countsbyid.headers + 1
+    const headers = cfeTables.countsbyid.headers
+    const startRow = headers + 1
     const startCol = 1
     const dataRows = cfeCountsById.getLastRow() - startRow
     const isSummary = (cfeTables.countsbyid.summary && cfeTables.countsbyid.summary !== "none")
@@ -323,7 +325,7 @@ function getCurrentCallsUploads() {
         data = cfeCountsById
             .getRange(startRow,
                 startCol,
-                cfeCountsById.getLastRow() - startRow,
+                cfeCountsById.getLastRow() - headers,
                 cfeCountsById.getLastColumn()
                 )
             .getDisplayValues()
