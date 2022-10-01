@@ -301,7 +301,7 @@ function showEventArtistEntries(arr) {
         table.append(tbody)
         table.append(tfooter)
         ele.append(table)  
-        table.classList.add("table", "table-success", "table-striped")      
+        table.classList.add("table", "table-primary", "table-striped")      
     }
 }
 
