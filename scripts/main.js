@@ -154,61 +154,46 @@ function showYear() {
     ele.innerText = yr
 }
 
-function showCurrentExhibitions(arr) {
-    const ele = document.getElementById("currentexhibitions")
-    document.getElementById("loadingcurrentexhibitions").remove()
-
-    if (arr.length<=0) {
-        ele.innerHTML = "No open calls"
-    } else {
-        //build table
-        let table = document.createElement("table")
-        let row = document.createElement("tr")
-        let hdr = document.createElement("th")
-        let col = document.createElement("td")
-
-        hdr.innerText = "Name"
-        row.append(hdr)
-        table.insertRow(0).append(hdr)    
-        
-        for (let i=0; i<arr.length; i++) {
-            col.innerText = arr[i]
-            row.append(col)
-            table.insertRow(-1).append(col)        
-        }
-        ele.appendChild(table)        
-    }
-
-    return
-}
-
 function showCurrentCallsUploads(arr) {
     const ele = document.getElementById("currentexhibitions")
     document.getElementById("loadingcurrentexhibitions").remove()
+    const schema = {
+        "Name" : 0,
+        "Entries" : 1
+    }
 
     if (arr.length<=0) {
         ele.innerHTML = "No open calls"
     } else {
         //build table
         const table = document.createElement("table")
-        const row = document.createElement("tr")
-        const hdr1 = document.createElement("th")
-        const hdr2 = document.createElement("th")
 
-        hdr1.innerText = "Name"
-        hdr2.innerText = "Entries"
-        row.append(hdr1, hdr2)
-        table.append(row)
+        //create headers
+        const headers = Object.keys(schema)
+        const thead = document.createElement("thead")
+        const hrow = document.createElement("tr")
+        headers.forEach(h => {
+            let hdr = document.createElement("th")
+            hdr.innerText = h
+            hrow.append(hdr)
+        })
+        thead.append(hrow)
+        table.append(thead)
         
-        for (let i=0; i<arr.length; i++) {
-            let row = document.createElement("tr")
-            let col1 = document.createElement("td")
-            let col2 = document.createElement("td")
-            col1.innerText = arr[i][1]
-            col2.innerText = arr[i][2]
-            row.append(col1, col2)
-            table.append(row) 
-        }
+        //create body
+        const tbody = document.createElement("tbody")
+        arr.forEach(r => {
+            let brow = document.createElement("tr")
+            r.shift() //remove the event id
+            r.forEach(c => {
+                let cell =  document.createElement("td")
+                cell.innerText = c
+                brow.append(cell)                
+            })
+            tbody.append(brow)
+        })
+        table.append(tbody)
+
         ele.append(table)       
         table.classList.add("table", "table-borderless") 
     }
@@ -218,38 +203,41 @@ function showCurrentCallsUploads(arr) {
 function showArtistsPerShowHistory(arr) {
     const ele = document.getElementById("artistpershowhistory")
     document.getElementById("loadingartistspershow").remove()
+    const schema = {
+        "Year" : 0,
+        "Name" : 1, 
+        "Artists" : 2
+    }
 
     if (arr.length<=0) {
         ele.innerHTML = "No history"
     } else {
         //build table
         const table = document.createElement("table")
+
+        //create headers
+        const headers = Object.keys(schema)
         const thead = document.createElement("thead")
-        const tbody = document.createElement("tbody")
-
-        const row = document.createElement("tr")
-        const hdr1 = document.createElement("th")
-        const hdr2 = document.createElement("th")
-        const hdr3 = document.createElement("th")
-
-        hdr1.innerText = "Year"
-        hdr2.innerText = "Name"
-        hdr3.innerText = "Artists"
-        row.append(hdr1, hdr2, hdr3)
-        thead.append(row)
+        const hrow = document.createElement("tr")
+        headers.forEach(h => {
+            let hdr = document.createElement("th")
+            hdr.innerText = h
+            hrow.append(hdr)
+        })
+        thead.append(hrow)
         table.append(thead)
 
-        for (let i=0; i<arr.length; i++) {
-            let row = document.createElement("tr")
-            let col1 = document.createElement("td")
-            let col2 = document.createElement("td")
-            let col3 = document.createElement("td")
-            col1.innerText = arr[i][0]
-            col2.innerText = arr[i][1]
-            col3.innerText = arr[i][2]
-            row.append(col1, col2, col3)
-            tbody.append(row) 
-        }
+        //create body
+        const tbody = document.createElement("tbody")
+        arr.forEach(r => {
+            let brow = document.createElement("tr")
+            r.forEach(c => {
+                let cell =  document.createElement("td")
+                cell.innerText = c
+                brow.append(cell)                
+            })
+            tbody.append(brow)
+        })
         table.append(tbody)
         ele.append(table)  
         table.classList.add("table", "table-striped")      
@@ -259,46 +247,50 @@ function showArtistsPerShowHistory(arr) {
 function showEventArtistEntries(arr) {
     const ele = document.getElementById("entriesamountdue")
     document.getElementById("loadingentriesamountdue").remove()
-    const headers = ["Exhibit", "Artist", "Entries", "Amount Due"]
+    const schema = {
+        "Exhibit" : 0,
+        "Artist" : 3,
+        "Entries" : 4,
+        "Amount Due" : 5
+    }
 
     if (arr.length<=0) {
         ele.innerHTML = "No open calls for entry"
     } else {
         //build table
         const table = document.createElement("table")
+        //create headers
+        const headers = Object.keys(schema)
         const thead = document.createElement("thead")
-        const tbody = document.createElement("tbody")
-        const tfooter = document.createElement("tfoot")
-
-        const row = document.createElement("tr")
-        const hdr1 = document.createElement("th")
-        const hdr2 = document.createElement("th")
-        const hdr3 = document.createElement("th")
-        const hdr4 = document.createElement("th")
-
-        hdr1.innerText = "Exhibit"
-        hdr2.innerText = "Artist"
-        hdr3.innerText = "Entries"
-        hdr4.innerText = "Amount Due"
-        row.append(hdr1, hdr2, hdr3, hdr4)
-        thead.append(row)
+        const hrow = document.createElement("tr")
+        headers.forEach(h => {
+            let hdr = document.createElement("th")
+            hdr.innerText = h
+            hrow.append(hdr)
+        })
+        thead.append(hrow)
         table.append(thead)
 
+        //create body
+        const tbody = document.createElement("tbody")
+        const bvalues = Object.values(schema)
+
         let feeTotal = 0
-        for (let i=0; i<arr.length; i++) {
+        arr.forEach(r => {
             let row = document.createElement("tr")
-            let col1 = document.createElement("td")
-            let col2 = document.createElement("td")
-            let col3 = document.createElement("td")
-            let col4 = document.createElement("td")
-            col1.innerText = arr[i][0]
-            col2.innerText = arr[i][3]
-            col3.innerText = arr[i][4]
-            col4.innerText = "$" + arr[i][5]
-            feeTotal += parseInt(arr[i][5])
-            row.append(col1, col2, col3, col4)
-            tbody.append(row) 
-        }
+            bvalues.forEach(c => {
+                let col = document.createElement("td")
+                col.innerText = r[c]
+                row.append(col)
+                if (c===schema["Amount Due"]) {
+                    feeTotal += parseInt(r[c])
+                }
+            })
+            tbody.append(row)     
+        })
+
+        //create footer
+        const tfooter = document.createElement("tfoot")
         const footers = ["Total", "", "", "$" + feeTotal]
         const footerRow = tfooter.insertRow()
         footers.forEach(footer => {
@@ -315,7 +307,6 @@ function showEventArtistEntries(arr) {
 
 document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
-//document.addEventListener("DOMContentLoaded", fetchCurrentExhibitions)
 document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)
 document.addEventListener("DOMContentLoaded", fetchArtistsPerShowHistory)
 document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)
