@@ -9,6 +9,8 @@ const EP_MEMBERS_SERVICES =
     "?q="
 
 var totalMembers = 0
+// TODO: Combine the fetches for member counts into one, store in object to retrieve and display
+// -- fetchTotalMembers, fetchTotalExhibitingMembers, fetchTotalAssociateMembers, fetchTotalPendingMembers
 
 function fetchTotalMembers() {
     const url = EP_MEMBERS_SERVICES + "totalmembers"

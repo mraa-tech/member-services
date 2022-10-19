@@ -443,15 +443,14 @@ function getEventArtistEntries() {
             dataRows,
             cfeEntries.getLastColumn())
         .getDisplayValues()
-        fee = getFee(data[0][idPos])
 
         for (let row = 0; row < data.length; row++) {
+            fee = getFee(data[row][idPos])
             if (fee>0) {
                 newData.push([...data[row], data[row][4]*fee])
             } else {
                 newData.push([...data[row], Math.abs(fee)])
             }
-
         }        
     }
 
