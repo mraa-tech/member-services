@@ -9,3 +9,5 @@ This application is a dashboard to be used mainly by the MRAA board. It provides
 - a list of exhibitions since tracking began with the number of entries per exhibit 
 
 Local path: CodeRepo / MRAA Projects / member-services
+
+It is currently hosted on GitHub as github pages, [Member Services](https://mraa-tech.github.io/member-services/index.html)
