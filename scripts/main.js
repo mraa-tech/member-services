@@ -166,92 +166,93 @@ function showYear() {
 }
 
 function showCurrentCallsUploads(arr) {
-   const ele = document.getElementById("currentexhibitions")
-   document.getElementById("loadingcurrentexhibitions").remove()
-   const schema = {
-      Name: 0,
-      Entries: 1,
-   }
+    const ele = document.getElementById("currentexhibitions")
+    document.getElementById("loadingcurrentexhibitions").remove()
+    const schema = {
+       Name: 0,
+       Entries: 1,
+    }
 
-   if (arr.length <= 0) {
-      ele.innerHTML = "No open calls"
-   } else {
-      //build table
-      const table = document.createElement("table")
+    if (arr.length <= 0) {
+       ele.innerHTML = "No open calls"
+    } else {
+       //build table
+       const table = document.createElement("table")
 
-      //create headers
-      const headers = Object.keys(schema)
-      const thead = document.createElement("thead")
-      const hrow = document.createElement("tr")
-      headers.forEach((h) => {
-         let hdr = document.createElement("th")
-         hdr.innerText = h
-         hrow.append(hdr)
-      })
-      thead.append(hrow)
-      table.append(thead)
+       //create headers
+       const headers = Object.keys(schema)
+       const thead = document.createElement("thead")
+       const hrow = document.createElement("tr")
+       headers.forEach((h) => {
+          let hdr = document.createElement("th")
+          hdr.innerText = h
+          hrow.append(hdr)
+       })
+       thead.append(hrow)
+       table.append(thead)
 
-      //create body
-      const tbody = document.createElement("tbody")
-      arr.forEach((r) => {
-         let brow = document.createElement("tr")
-         r.shift() //remove the event id
-         r.forEach((c) => {
-            let cell = document.createElement("td")
-            cell.innerText = c
-            brow.append(cell)
-         })
-         tbody.append(brow)
-      })
-      table.append(tbody)
+       //create body
+       const tbody = document.createElement("tbody")
+       arr.forEach((r) => {
+          let brow = document.createElement("tr")
+          r.shift() //remove the event id
+          r.forEach((c) => {
+             let cell = document.createElement("td")
+             cell.innerText = c
+             brow.append(cell)
+          })
+          tbody.append(brow)
+       })
+       table.append(tbody)
 
-      ele.append(table)
-      table.classList.add("table", "table-borderless")
-   }
+       ele.append(table)
+       table.classList.add("table", "table-borderless")
+    }
+
 }
 
 function showArtistsPerShowHistory(arr) {
-   const ele = document.getElementById("artistpershowhistory")
-   document.getElementById("loadingartistspershow").remove()
-   const schema = {
-      Year: 0,
-      Name: 1,
-      Artists: 2,
-   }
+    const ele = document.getElementById("artistpershowhistory")
+    document.getElementById("loadingartistspershow").remove()
+    const schema = {
+       Year: 0,
+       Name: 1,
+       Artists: 2,
+    }
 
-   if (arr.length <= 0) {
-      ele.innerHTML = "No history"
-   } else {
-      //build table
-      const table = document.createElement("table")
+    if (arr.length <= 0) {
+       ele.innerHTML = "No history"
+    } else {
+       //build table
+       const table = document.createElement("table")
 
-      //create headers
-      const headers = Object.keys(schema)
-      const thead = document.createElement("thead")
-      const hrow = document.createElement("tr")
-      headers.forEach((h) => {
-         let hdr = document.createElement("th")
-         hdr.innerText = h
-         hrow.append(hdr)
-      })
-      thead.append(hrow)
-      table.append(thead)
+       //create headers
+       const headers = Object.keys(schema)
+       const thead = document.createElement("thead")
+       const hrow = document.createElement("tr")
+       headers.forEach((h) => {
+          let hdr = document.createElement("th")
+          hdr.innerText = h
+          hrow.append(hdr)
+       })
+       thead.append(hrow)
+       table.append(thead)
 
-      //create body
-      const tbody = document.createElement("tbody")
-      arr.forEach((r) => {
-         let brow = document.createElement("tr")
-         r.forEach((c) => {
-            let cell = document.createElement("td")
-            cell.innerText = c
-            brow.append(cell)
-         })
-         tbody.append(brow)
-      })
-      table.append(tbody)
-      ele.append(table)
-      table.classList.add("table", "table-striped")
-   }
+       //create body
+       const tbody = document.createElement("tbody")
+       arr.forEach((r) => {
+          let brow = document.createElement("tr")
+          r.forEach((c) => {
+             let cell = document.createElement("td")
+             cell.innerText = c
+             brow.append(cell)
+          })
+          tbody.append(brow)
+       })
+       table.append(tbody)
+       ele.append(table)
+       table.classList.add("table", "table-striped")
+    }
 }
 
 function showExhibitPayments(arr) {
@@ -360,4 +361,5 @@ document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
 document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)
 document.addEventListener("DOMContentLoaded", fetchArtistsPerShowHistory)
-document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)
+document.addEventListener("DOMContentLoaded", fetchExhibitPayments)
+//document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)
