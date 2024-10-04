@@ -101,151 +101,6 @@ function fetchArtistsPerShowHistory() {
     }))
 }
 
-function fetchEventArtistEntries() {
-    const url = EP_MEMBERS_SERVICES + "eventartistentries"
-    fetch(url)
-    .then(resp => resp.json()
-    .then(resp => {
-        showEventArtistEntries(resp)
-    }))
-}
-
-function fetchMemberCounts() {
-    fetchTotalMembers()
-    fetchTotalExhibitingMembers()
-    fetchTotalPendingMembers()
-    fetchTotalAssociateMembers()
-    fetchTotalDuesPaid()
-}
-
-function showTotalMembers(t) {
-    let loading = document.getElementById('memberCountLoading')
-    let ele = document.getElementById('memberCount')
-    loading.remove()
-    ele.append(t)
-}
-
-function showTotalExhibitingMembers(t) {
-    let loading = document.getElementById('exhibitingCountLoading')
-    let ele = document.getElementById('exhibitingMemberCount')
-    loading.remove()
-    ele.append(t)
-}
-
-function showTotalPendingMembers(t) {
-    let ele = document.getElementById('pendingCount')
-    ele.innerText = t
-}
-
-function showTotalAssociateMembers(t) {
-    let ele = document.getElementById('associateCount')
-    ele.innerText = t
-}
-
-function showTotalDuesPaid(t) {
-    let ele = document.getElementById('duesPaid')
-    if (t < totalMembers) {
-        ele.parentElement.classList.add("warning")
-    } 
-    ele.innerText = t
-}
-
-function showYear() {
-    const yr = new Date().getFullYear()
-    const ele = document.getElementById("yr")
-    ele.innerText = yr
-}
-
-function showCurrentCallsUploads(arr) {
-    const ele = document.getElementById("currentexhibitions")
-    document.getElementById("loadingcurrentexhibitions").remove()
-    const schema = {
-        "Name" : 0,
-        "Entries" : 1
-    }
-
-    if (arr.length<=0) {
-        ele.innerHTML = "No open calls"
-    } else {
-        //build table
-        const table = document.createElement("table")
-
-        //create headers
-        const headers = Object.keys(schema)
-        const thead = document.createElement("thead")
-        const hrow = document.createElement("tr")
-        headers.forEach(h => {
-            let hdr = document.createElement("th")
-            hdr.innerText = h
-            hrow.append(hdr)
-        })
-        thead.append(hrow)
-        table.append(thead)
-        
-        //create body
-        const tbody = document.createElement("tbody")
-        arr.forEach(r => {
-            let brow = document.createElement("tr")
-            r.shift() //remove the event id
-            r.forEach(c => {
-                let cell =  document.createElement("td")
-                cell.innerText = c
-                brow.append(cell)                
-            })
-            tbody.append(brow)
-        })
-        table.append(tbody)
-
-        ele.append(table)       
-        table.classList.add("table", "table-borderless") 
-    }
-
-}
-
-function showArtistsPerShowHistory(arr) {
-    const ele = document.getElementById("artistpershowhistory")
-    document.getElementById("loadingartistspershow").remove()
-    const schema = {
-        "Year" : 0,
-        "Name" : 1, 
-        "Artists" : 2
-    }
-
-    if (arr.length<=0) {
-        ele.innerHTML = "No history"
-    } else {
-        //build table
-        const table = document.createElement("table")
-
-        //create headers
-        const headers = Object.keys(schema)
-        const thead = document.createElement("thead")
-        const hrow = document.createElement("tr")
-        headers.forEach(h => {
-            let hdr = document.createElement("th")
-            hdr.innerText = h
-            hrow.append(hdr)
-        })
-        thead.append(hrow)
-        table.append(thead)
-
-        //create body
-        const tbody = document.createElement("tbody")
-        arr.forEach(r => {
-            let brow = document.createElement("tr")
-            r.forEach(c => {
-                let cell =  document.createElement("td")
-                cell.innerText = c
-                brow.append(cell)                
-            })
-            tbody.append(brow)
-        })
-        table.append(tbody)
-        ele.append(table)  
-        table.classList.add("table", "table-striped")      
-    }
-}
-
 function fetchExhibitPayments() {
    const url = EP_MEMBERS_SERVICES + "exhibitpayments"
    fetch(url).then((resp) =>
@@ -253,6 +108,150 @@ function fetchExhibitPayments() {
          showExhibitPayments(resp)
       })
    )
+}
+
+// function fetchEventArtistEntries() {
+//     const url = EP_MEMBERS_SERVICES + "eventartistentries"
+//     fetch(url)
+//     .then(resp => resp.json()
+//     .then(resp => {
+//         showEventArtistEntries(resp)
+//     }))
+// }
+
+function fetchMemberCounts() {
+   fetchTotalMembers()
+   fetchTotalExhibitingMembers()
+   fetchTotalPendingMembers()
+   fetchTotalAssociateMembers()
+   fetchTotalDuesPaid()
+}
+
+function showTotalMembers(t) {
+   let loading = document.getElementById("memberCountLoading")
+   let ele = document.getElementById("memberCount")
+   loading.remove()
+   ele.append(t)
+}
+
+function showTotalExhibitingMembers(t) {
+   let loading = document.getElementById("exhibitingCountLoading")
+   let ele = document.getElementById("exhibitingMemberCount")
+   loading.remove()
+   ele.append(t)
+}
+
+function showTotalPendingMembers(t) {
+   let ele = document.getElementById("pendingCount")
+   ele.innerText = t
+}
+
+function showTotalAssociateMembers(t) {
+   let ele = document.getElementById("associateCount")
+   ele.innerText = t
+}
+
+function showTotalDuesPaid(t) {
+   let ele = document.getElementById("duesPaid")
+   if (t < totalMembers) {
+      ele.parentElement.classList.add("warning")
+   }
+   ele.innerText = t
+}
+
+function showYear() {
+   const yr = new Date().getFullYear()
+   const ele = document.getElementById("yr")
+   ele.innerText = yr
+}
+
+function showCurrentCallsUploads(arr) {
+   const ele = document.getElementById("currentexhibitions")
+   document.getElementById("loadingcurrentexhibitions").remove()
+   const schema = {
+      Name: 0,
+      Entries: 1,
+   }
+
+   if (arr.length <= 0) {
+      ele.innerHTML = "No open calls"
+   } else {
+      //build table
+      const table = document.createElement("table")
+
+      //create headers
+      const headers = Object.keys(schema)
+      const thead = document.createElement("thead")
+      const hrow = document.createElement("tr")
+      headers.forEach((h) => {
+         let hdr = document.createElement("th")
+         hdr.innerText = h
+         hrow.append(hdr)
+      })
+      thead.append(hrow)
+      table.append(thead)
+
+      //create body
+      const tbody = document.createElement("tbody")
+      arr.forEach((r) => {
+         let brow = document.createElement("tr")
+         r.shift() //remove the event id
+         r.forEach((c) => {
+            let cell = document.createElement("td")
+            cell.innerText = c
+            brow.append(cell)
+         })
+         tbody.append(brow)
+      })
+      table.append(tbody)
+
+      ele.append(table)
+      table.classList.add("table", "table-borderless")
+   }
+}
+
+function showArtistsPerShowHistory(arr) {
+   const ele = document.getElementById("artistpershowhistory")
+   document.getElementById("loadingartistspershow").remove()
+   const schema = {
+      Year: 0,
+      Name: 1,
+      Artists: 2,
+   }
+
+   if (arr.length <= 0) {
+      ele.innerHTML = "No history"
+   } else {
+      //build table
+      const table = document.createElement("table")
+
+      //create headers
+      const headers = Object.keys(schema)
+      const thead = document.createElement("thead")
+      const hrow = document.createElement("tr")
+      headers.forEach((h) => {
+         let hdr = document.createElement("th")
+         hdr.innerText = h
+         hrow.append(hdr)
+      })
+      thead.append(hrow)
+      table.append(thead)
+
+      //create body
+      const tbody = document.createElement("tbody")
+      arr.forEach((r) => {
+         let brow = document.createElement("tr")
+         r.forEach((c) => {
+            let cell = document.createElement("td")
+            cell.innerText = c
+            brow.append(cell)
+         })
+         tbody.append(brow)
+      })
+      table.append(tbody)
+      ele.append(table)
+      table.classList.add("table", "table-striped")
+   }
 }
 
 function showExhibitPayments(arr) {
