@@ -1,3 +1,7 @@
+/**
+ * Data source definitions for CFE
+ * @returns {object}
+ */
 function getCFETables() {
    return {
       exhibits: {
@@ -132,6 +136,48 @@ function getCFETables() {
             amountpaid: "h", // blank - entered by treasurer when payment is made
             datereceived: "i", // blank - entered by treasurer when payment is made
             timestamp: "j",
+         },
+      },
+      paymentdashboard: {
+         name: "Payment Dashboard",
+         type: "dashboard",
+         pivottables: {
+            exhibittotals: {
+               name: "Exhibit Totals",
+               type: "pivot",
+               headers: 2,
+               summary: 1,
+               schema: {
+                  exhibitname: "a",
+                  totalentries: "b",
+                  totalpaid: "c",
+               },
+            },
+            totalsbyemail: {
+               name: "Exhibit Totals By Artist Email",
+               type: "pivot",
+               headers: 2,
+               summary: 1,
+               schema: {
+                  artistemail: "e",
+                  exhibitname: "f",
+                  qtyentered: "g",
+                  amountpaid: "h",
+               },
+            },
+            totalsbyexhibitname: {
+               name: "Exhibit Totals By Exhibit Name",
+               type: "pivot",
+               headers: 2,
+               summary: 1,
+               schema: {
+                  exhibitname: "j",
+                  artistlastname: "k",
+                  artistfirstname: "l",
+                  qtyentered: "m",
+                  amountpaid: "n",
+               },
+            },
          },
       },
    }
@@ -534,4 +580,29 @@ function getFee(id) {
    // return show fee as negative as indicator that it's not an entry fee
    // TODO: refactor show fee indicator
    return fee
+}
+
+function getExhibitPaymentsDashboard() {
+   const cfeTables = getCFETables()
+   const cfePaymentDashboard = connect(CFE_ID).getSheetByName(
+      cfeTables.paymentdashboard.name
+   )
+   const cfePDPivotTables = cfeTables.paymentdashboard.pivottables
+   const cfeTBENPivotTable = cfePDPivotTables.totalsbyexhibitname
+   const cfeTBENSchema = cfePDPivotTables.totalsbyexhibitname.schema // schema for totalsbyexhibitname pivot table
+   const startRow = 1 // include headers and summary rows
+   const cols = Object.keys(cfeTBENSchema).length
+   const startCol = cfeTBENSchema.exhibitname.colToIndex() + 1
+   const headers = cfeTBENPivotTable.headers
+   // const summary = cfeTBENPivotTable.summary
+   const dataRows = cfePaymentDashboard.getLastRow() // include headers and summary rows
+
+   let data = []
+
+   if (dataRows > 0) {
+      data = cfePaymentDashboard
+         .getRange(startRow, startCol, dataRows, cols)
+         .getDisplayValues()
+   }
+   return data
 }

@@ -246,6 +246,56 @@ function showArtistsPerShowHistory(arr) {
     }
 }
 
+function fetchExhibitPayments() {
+   const url = EP_MEMBERS_SERVICES + "exhibitpayments"
+   fetch(url).then((resp) =>
+      resp.json().then((resp) => {
+         showExhibitPayments(resp)
+      })
+   )
+}
+
+function showExhibitPayments(arr) {
+   const ele = document.getElementById("exhibitpayments")
+   document.getElementById("loadingexhibitpayments").remove()
+   const schema = {
+      Exhibit: 0,
+      Artist: 1,
+      "Amount Paid": 2,
+   }
+   if (arr.length <= 0) {
+      ele.innerHTML = "No payments"
+   } else {
+      //build table
+      const table = document.createElement("table")
+      //create headers
+      //   const headers = Object.keys(schema)
+      //   const thead = document.createElement("thead")
+      //   const hrow = document.createElement("tr")
+      //   headers.forEach((h) => {
+      //      let hdr = document.createElement("th")
+      //      hdr.innerText = h
+      //      hrow.append(hdr)
+      //   })
+      //   thead.append(hrow)
+      //   table.append(thead)
+      //create body
+      const tbody = document.createElement("tbody")
+      arr.forEach((r) => {
+         let brow = document.createElement("tr")
+         r.forEach((c) => {
+            let cell = document.createElement("td")
+            cell.innerText = c
+            brow.append(cell)
+         })
+         tbody.append(brow)
+      })
+      table.append(tbody)
+      ele.append(table)
+      table.classList.add("table", "table-striped")
+   }
+}
+
 function showEventArtistEntries(arr) {
     const ele = document.getElementById("entriesamountdue")
     document.getElementById("loadingentriesamountdue").remove()

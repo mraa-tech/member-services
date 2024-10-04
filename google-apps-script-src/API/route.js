@@ -18,77 +18,82 @@ ROUTES.path("currentexhibitions", getCurrentCallsResponse)
 ROUTES.path("currentcallsuploads", getCurrentCallsUploadsResponse)
 ROUTES.path("artistspershowhistory", getArtistsPerShowResponse)
 ROUTES.path("eventartistentries", getEventArtistEntriesResponse)
+ROUTES.path("exhibitpayments", getExhibitPaymentsResponse)
 
 function doGet(e) {
-    let result = route(e.parameter['q'])
-    let response = JSON.stringify(result)
-    
-    return ContentService
-        .createTextOutput(response)
-        .setMimeType(ContentService.MimeType.JSON)
+   let result = route(e.parameter["q"])
+   let response = JSON.stringify(result)
+
+   return ContentService.createTextOutput(response).setMimeType(
+      ContentService.MimeType.JSON
+   )
 }
 
 function doPost(e) {
-    let result = route('post', e.parameter['q'])
+   let result = route("post", e.parameter["q"])
 }
 
 function route(path) {
-    let result = ROUTES[path]()
-    return result
+   let result = ROUTES[path]()
+   return result
 }
 
 function getStatusListResponse() {
-    return getStatusList()
+   return getStatusList()
 }
 
 function getMembershipTypeListResponse() {
-    return getMembershipTypeList()
+   return getMembershipTypeList()
 }
 
-function getPaymentMethodListResponse(){
-    return getPaymentMethodList()
+function getPaymentMethodListResponse() {
+   return getPaymentMethodList()
 }
 
 function getDuesForExhibitingResponse() {
-    return getDuesAmountByMembershipType('exhibiting')
+   return getDuesAmountByMembershipType("exhibiting")
 }
 
 function getDuesForAssociateResponse() {
-    return getDuesAmountByMembershipType('associate')
+   return getDuesAmountByMembershipType("associate")
 }
 
 function getTotalMembersResponse() {
-    return getTotalMembers("all")
+   return getTotalMembers("all")
 }
 
 function getTotalExhibitingMembersResponse() {
-    return getTotalMembers("exhibiting")
+   return getTotalMembers("exhibiting")
 }
 
 function getTotalAssociateMembersResponse() {
-    return getTotalMembers("associate")
+   return getTotalMembers("associate")
 }
 
 function getTotalPendingMembersResponse() {
-    return getTotalMembers("pending")
+   return getTotalMembers("pending")
 }
 
 function getTotalDuesPaidResponse() {
-    return getDuesPaid()
+   return getDuesPaid()
 }
 
 function getCurrentCallsResponse() {
-    return getCurrentCalls()
+   return getCurrentCalls()
 }
 
 function getCurrentCallsUploadsResponse() {
-    return getCurrentCallsUploads()
+   return getCurrentCallsUploads()
 }
 
 function getArtistsPerShowResponse() {
-    return getArtistsPerShow()
+   return getArtistsPerShow()
 }
 
 function getEventArtistEntriesResponse() {
-    return getEventArtistEntries()
+   return getEventArtistEntries()
+}
+
+function getExhibitPaymentsResponse() {
+   return getExhibitPaymentsDashboard()
 }
