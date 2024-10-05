@@ -3,10 +3,10 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
-// Endpoint => MRAA Member Services Project, latest version 17
+// New Endpoint => MRAA Member Services Project, latest version 21
 const EP_MEMBERS_SERVICES =
-    "https://script.google.com/macros/s/AKfycbyP-VFaicuULk87Rrc5bIOrPn9FO-696MSDMz30zBiSDsmUr-ff_3ctnAsKIn_qhPW2Bg/exec" +
-    "?q="
+   "https://script.google.com/macros/s/AKfycbzQm6ucoxPMaOJeEo2Nec92LbcoPFW_DMNC5QEDfCtoiORzVRykeY5yXhaD4FT5Iebn2w/exec" +
+   "?q="
 
 var totalMembers = 0
 // TODO: Combine the fetches for member counts into one, store in object to retrieve and display
@@ -101,103 +101,112 @@ function fetchArtistsPerShowHistory() {
     }))
 }
 
-function fetchEventArtistEntries() {
-    const url = EP_MEMBERS_SERVICES + "eventartistentries"
-    fetch(url)
-    .then(resp => resp.json()
-    .then(resp => {
-        showEventArtistEntries(resp)
-    }))
+function fetchExhibitPayments() {
+   const url = EP_MEMBERS_SERVICES + "exhibitpayments"
+   fetch(url).then((resp) =>
+      resp.json().then((resp) => {
+         showExhibitPayments(resp)
+      })
+   )
 }
 
+// function fetchEventArtistEntries() {
+//     const url = EP_MEMBERS_SERVICES + "eventartistentries"
+//     fetch(url)
+//     .then(resp => resp.json()
+//     .then(resp => {
+//         showEventArtistEntries(resp)
+//     }))
+// }
+
 function fetchMemberCounts() {
-    fetchTotalMembers()
-    fetchTotalExhibitingMembers()
-    fetchTotalPendingMembers()
-    fetchTotalAssociateMembers()
-    fetchTotalDuesPaid()
+   fetchTotalMembers()
+   fetchTotalExhibitingMembers()
+   fetchTotalPendingMembers()
+   fetchTotalAssociateMembers()
+   fetchTotalDuesPaid()
 }
 
 function showTotalMembers(t) {
-    let loading = document.getElementById('memberCountLoading')
-    let ele = document.getElementById('memberCount')
-    loading.remove()
-    ele.append(t)
+   let loading = document.getElementById("memberCountLoading")
+   let ele = document.getElementById("memberCount")
+   loading.remove()
+   ele.append(t)
 }
 
 function showTotalExhibitingMembers(t) {
-    let loading = document.getElementById('exhibitingCountLoading')
-    let ele = document.getElementById('exhibitingMemberCount')
-    loading.remove()
-    ele.append(t)
+   let loading = document.getElementById("exhibitingCountLoading")
+   let ele = document.getElementById("exhibitingMemberCount")
+   loading.remove()
+   ele.append(t)
 }
 
 function showTotalPendingMembers(t) {
-    let ele = document.getElementById('pendingCount')
-    ele.innerText = t
+   let ele = document.getElementById("pendingCount")
+   ele.innerText = t
 }
 
 function showTotalAssociateMembers(t) {
-    let ele = document.getElementById('associateCount')
-    ele.innerText = t
+   let ele = document.getElementById("associateCount")
+   ele.innerText = t
 }
 
 function showTotalDuesPaid(t) {
-    let ele = document.getElementById('duesPaid')
-    if (t < totalMembers) {
-        ele.parentElement.classList.add("warning")
-    } 
-    ele.innerText = t
+   let ele = document.getElementById("duesPaid")
+   if (t < totalMembers) {
+      ele.parentElement.classList.add("warning")
+   }
+   ele.innerText = t
 }
 
 function showYear() {
-    const yr = new Date().getFullYear()
-    const ele = document.getElementById("yr")
-    ele.innerText = yr
+   const yr = new Date().getFullYear()
+   const ele = document.getElementById("yr")
+   ele.innerText = yr
 }
 
 function showCurrentCallsUploads(arr) {
     const ele = document.getElementById("currentexhibitions")
     document.getElementById("loadingcurrentexhibitions").remove()
     const schema = {
-        "Name" : 0,
-        "Entries" : 1
+       Name: 0,
+       Entries: 1,
     }
 
-    if (arr.length<=0) {
-        ele.innerHTML = "No open calls"
+    if (arr.length <= 0) {
+       ele.innerHTML = "No open calls"
     } else {
-        //build table
-        const table = document.createElement("table")
+       //build table
+       const table = document.createElement("table")
 
-        //create headers
-        const headers = Object.keys(schema)
-        const thead = document.createElement("thead")
-        const hrow = document.createElement("tr")
-        headers.forEach(h => {
-            let hdr = document.createElement("th")
-            hdr.innerText = h
-            hrow.append(hdr)
-        })
-        thead.append(hrow)
-        table.append(thead)
-        
-        //create body
-        const tbody = document.createElement("tbody")
-        arr.forEach(r => {
-            let brow = document.createElement("tr")
-            r.shift() //remove the event id
-            r.forEach(c => {
-                let cell =  document.createElement("td")
-                cell.innerText = c
-                brow.append(cell)                
-            })
-            tbody.append(brow)
-        })
-        table.append(tbody)
+       //create headers
+       const headers = Object.keys(schema)
+       const thead = document.createElement("thead")
+       const hrow = document.createElement("tr")
+       headers.forEach((h) => {
+          let hdr = document.createElement("th")
+          hdr.innerText = h
+          hrow.append(hdr)
+       })
+       thead.append(hrow)
+       table.append(thead)
 
-        ele.append(table)       
-        table.classList.add("table", "table-borderless") 
+       //create body
+       const tbody = document.createElement("tbody")
+       arr.forEach((r) => {
+          let brow = document.createElement("tr")
+          r.shift() //remove the event id
+          r.forEach((c) => {
+             let cell = document.createElement("td")
+             cell.innerText = c
+             brow.append(cell)
+          })
+          tbody.append(brow)
+       })
+       table.append(tbody)
+
+       ele.append(table)
+       table.classList.add("table", "table-borderless")
     }
 
 }
@@ -206,44 +215,88 @@ function showArtistsPerShowHistory(arr) {
     const ele = document.getElementById("artistpershowhistory")
     document.getElementById("loadingartistspershow").remove()
     const schema = {
-        "Year" : 0,
-        "Name" : 1, 
-        "Artists" : 2
+       Year: 0,
+       Name: 1,
+       Artists: 2,
     }
 
-    if (arr.length<=0) {
-        ele.innerHTML = "No history"
+    if (arr.length <= 0) {
+       ele.innerHTML = "No history"
     } else {
-        //build table
-        const table = document.createElement("table")
+       //build table
+       const table = document.createElement("table")
 
-        //create headers
-        const headers = Object.keys(schema)
-        const thead = document.createElement("thead")
-        const hrow = document.createElement("tr")
-        headers.forEach(h => {
-            let hdr = document.createElement("th")
-            hdr.innerText = h
-            hrow.append(hdr)
-        })
-        thead.append(hrow)
-        table.append(thead)
+       //create headers
+       const headers = Object.keys(schema)
+       const thead = document.createElement("thead")
+       const hrow = document.createElement("tr")
+       headers.forEach((h) => {
+          let hdr = document.createElement("th")
+          hdr.innerText = h
+          hrow.append(hdr)
+       })
+       thead.append(hrow)
+       table.append(thead)
 
-        //create body
-        const tbody = document.createElement("tbody")
-        arr.forEach(r => {
-            let brow = document.createElement("tr")
-            r.forEach(c => {
-                let cell =  document.createElement("td")
-                cell.innerText = c
-                brow.append(cell)                
-            })
-            tbody.append(brow)
-        })
-        table.append(tbody)
-        ele.append(table)  
-        table.classList.add("table", "table-striped")      
+       //create body
+       const tbody = document.createElement("tbody")
+       arr.forEach((r) => {
+          let brow = document.createElement("tr")
+          r.forEach((c) => {
+             let cell = document.createElement("td")
+             cell.innerText = c
+             brow.append(cell)
+          })
+          tbody.append(brow)
+       })
+       table.append(tbody)
+       ele.append(table)
+       table.classList.add("table", "table-striped")
     }
+}
+
+function showExhibitPayments(arr) {
+   const ele = document.getElementById("exhibitpayments")
+   document.getElementById("loadingexhibitpayments").remove()
+   const schema = {
+      Exhibit: 0,
+      Artist: 1,
+      "Amount Paid": 2,
+   }
+   if (arr.length <= 0) {
+      ele.innerHTML = "No payments"
+   } else {
+      //build table
+      const table = document.createElement("table")
+      //create headers
+      //   const headers = Object.keys(schema)
+      //   const thead = document.createElement("thead")
+      //   const hrow = document.createElement("tr")
+      //   headers.forEach((h) => {
+      //      let hdr = document.createElement("th")
+      //      hdr.innerText = h
+      //      hrow.append(hdr)
+      //   })
+      //   thead.append(hrow)
+      //   table.append(thead)
+      //create body
+      const tbody = document.createElement("tbody")
+      arr.forEach((r) => {
+         let brow = document.createElement("tr")
+         r.forEach((c) => {
+            let cell = document.createElement("td")
+            if (c === "" || c === "$0") {
+               cell.classList.add("text-danger")
+            }
+            cell.innerText = c
+            brow.append(cell)
+         })
+         tbody.append(brow)
+      })
+      table.append(tbody)
+      ele.append(table)
+      table.classList.add("table", "table-striped")
+   }
 }
 
 function showEventArtistEntries(arr) {
@@ -311,4 +364,5 @@ document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
 document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)
 document.addEventListener("DOMContentLoaded", fetchArtistsPerShowHistory)
-document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)
+document.addEventListener("DOMContentLoaded", fetchExhibitPayments)
+//document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)
