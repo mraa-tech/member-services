@@ -585,6 +585,13 @@ function getFee(id) {
    return fee
 }
 
+// TODO: refactor to account for blank rows
+/**
+ * This currently assumes that the Exhibit Totals by Exhibit Name is the longest in the sheet.
+ * It does not account for blank rows if it is not the longest.
+ *
+ * @returns {array}
+ */
 function getExhibitPaymentsDashboard() {
    const cfeTables = getCFETables()
    const cfePaymentDashboard = connect(CFE_ID).getSheetByName(
@@ -594,10 +601,8 @@ function getExhibitPaymentsDashboard() {
    const cfeTBENPivotTable = cfePDPivotTables.totalsbyexhibitname
    const cfeTBENSchema = cfePDPivotTables.totalsbyexhibitname.schema // schema for totalsbyexhibitname pivot table
    const startRow = 1 + cfeTBENPivotTable.titles // include headers and summary rows, exclude title
-   const cols = Object.keys(cfeTBENSchema).length
-   const startCol = cfeTBENSchema.exhibitname.colToIndex() + 1
-   // const headers = cfeTBENPivotTable.headers
-   // const summary = cfeTBENPivotTable.summary
+   const cols = Object.keys(cfeTBENSchema).length // determine number of columns in pivot table
+   const startCol = cfeTBENSchema.exhibitname.colToIndex() + 1 // determine starting column for this pivot table
    const dataRows = cfePaymentDashboard.getLastRow() // include headers and summary rows
 
    let data = []
@@ -607,6 +612,5 @@ function getExhibitPaymentsDashboard() {
          .getRange(startRow, startCol, dataRows, cols)
          .getDisplayValues()
    }
-   //return "getExhibitPaymentsDashboard"
    return data
 }

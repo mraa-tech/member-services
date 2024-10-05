@@ -3,12 +3,7 @@ const EP_MEMBERS_DUES =
     "https://script.google.com/macros/s/AKfycbwA5NiGEeUPIzuvd9Nf5LoHWEotAitPNvbl9FQJC1oJ7Y-0uvC4IkOz03jcHWQEMvYD/exec" +
     "?q="
 
-// Endpoint => MRAA Member Services Project, latest version 17
-// const EP_MEMBERS_SERVICES =
-//     "https://script.google.com/macros/s/AKfycbyP-VFaicuULk87Rrc5bIOrPn9FO-696MSDMz30zBiSDsmUr-ff_3ctnAsKIn_qhPW2Bg/exec" +
-//     "?q="
-
-// Test Endpoint => MRAA Member Services Project, latest version 19
+// New Endpoint => MRAA Member Services Project, latest version 21
 const EP_MEMBERS_SERVICES =
    "https://script.google.com/macros/s/AKfycbzQm6ucoxPMaOJeEo2Nec92LbcoPFW_DMNC5QEDfCtoiORzVRykeY5yXhaD4FT5Iebn2w/exec" +
    "?q="
