@@ -290,6 +290,9 @@ function showExhibitPayments(arr) {
          let brow = document.createElement("tr")
          r.forEach((c) => {
             let cell = document.createElement("td")
+            if (c === "" || c === "$0") {
+               cell.classList.add("text-danger")
+            }
             cell.innerText = c
             brow.append(cell)
          })
