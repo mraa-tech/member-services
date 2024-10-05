@@ -8,9 +8,9 @@ const EP_MEMBERS_DUES =
 //     "https://script.google.com/macros/s/AKfycbyP-VFaicuULk87Rrc5bIOrPn9FO-696MSDMz30zBiSDsmUr-ff_3ctnAsKIn_qhPW2Bg/exec" +
 //     "?q="
 
-// Test Endpoint => MRAA Member Services Project, latest version 17
+// Test Endpoint => MRAA Member Services Project, latest version 19
 const EP_MEMBERS_SERVICES =
-   "https://script.google.com/macros/s/AKfycbwHGRO4AD51aciNiVI64hGbNWmCQNd1Z8fynYQtXJZg/dev" +
+   "https://script.google.com/macros/s/AKfycbzQm6ucoxPMaOJeEo2Nec92LbcoPFW_DMNC5QEDfCtoiORzVRykeY5yXhaD4FT5Iebn2w/exec" +
    "?q="
 
 var totalMembers = 0
