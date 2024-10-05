@@ -147,6 +147,7 @@ function getCFETables() {
                type: "pivot",
                headers: 2,
                summary: 1,
+               titles: 1,
                schema: {
                   exhibitname: "a",
                   totalentries: "b",
@@ -158,6 +159,7 @@ function getCFETables() {
                type: "pivot",
                headers: 2,
                summary: 1,
+               titles: 1,
                schema: {
                   artistemail: "e",
                   exhibitname: "f",
@@ -170,6 +172,7 @@ function getCFETables() {
                type: "pivot",
                headers: 2,
                summary: 1,
+               titles: 1,
                schema: {
                   exhibitname: "j",
                   artistlastname: "k",
@@ -590,10 +593,10 @@ function getExhibitPaymentsDashboard() {
    const cfePDPivotTables = cfeTables.paymentdashboard.pivottables
    const cfeTBENPivotTable = cfePDPivotTables.totalsbyexhibitname
    const cfeTBENSchema = cfePDPivotTables.totalsbyexhibitname.schema // schema for totalsbyexhibitname pivot table
-   const startRow = 1 // include headers and summary rows
+   const startRow = 1 + cfeTBENPivotTable.titles // include headers and summary rows, exclude title
    const cols = Object.keys(cfeTBENSchema).length
    const startCol = cfeTBENSchema.exhibitname.colToIndex() + 1
-   const headers = cfeTBENPivotTable.headers
+   // const headers = cfeTBENPivotTable.headers
    // const summary = cfeTBENPivotTable.summary
    const dataRows = cfePaymentDashboard.getLastRow() // include headers and summary rows
 
