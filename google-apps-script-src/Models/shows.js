@@ -161,8 +161,9 @@ function getCFETables() {
                summary: 1,
                titles: 1,
                schema: {
-                  artistemail: "e",
-                  exhibitname: "f",
+                  artistemail: "d",
+                  exhibitname: "e",
+                  exhibitid: "f",
                   qtyentered: "g",
                   amountpaid: "h",
                },
