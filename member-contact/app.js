@@ -1,6 +1,6 @@
 function getEmailList() {
     // EndPoint source -> MRAA Critique List version 8, TODO move to MRAA Member Services
-    const url = "https://script.google.com/macros/s/AKfycbyMVgIXgdkM51WXD8aFEXJeZuUwYpxjFf6DV2xN_DQvc6eiiQ289q1fGRCfz84dj8WcqA/exec"
+    const url = ""
     let msg = document.getElementById('msg');
     msg.innerHTML = "Fetching, Please wait ...";
 
