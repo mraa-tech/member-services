@@ -4,31 +4,6 @@
  */
 function getCFETables() {
    return {
-      exhibits: {
-         name: "Exhibits",
-         type: "standard",
-         headers: 1,
-         schema: {
-            eventid: "a",
-            eventtitle: "b",
-            firstname: "c",
-            lastname: "d",
-            email: "e",
-            phone: "f",
-            worktitle: "g",
-            medium: "h",
-            width: "i",
-            height: "j",
-            price: "k",
-            filename: "l",
-            fileid: "m",
-            member: "n",
-            availablity: "o", // not currently used
-            hidden: "p", // not currently used
-            fullname: "q", // not currently used
-            timestamp: "r", // not currently used
-         },
-      },
       countsbytitleartist: {
          name: "Counts By Title Artist",
          type: "pivot",
@@ -64,33 +39,6 @@ function getCFETables() {
             count: "c",
          },
       },
-      config: {
-         name: "Config",
-         type: "standard",
-         headers: 1,
-         schema: {
-            showid: "a",
-            exhibitname: "b",
-            cfeopendate: "c",
-            cfeclosedate: "d",
-            maxentriesperartist: "e",
-            maxentriespershow: "f",
-            imagefolderid: "g",
-            allownfs: "h",
-            status: "i",
-            payfeeonly: "j",
-            purchaselimit: "k",
-            showopendate: "l",
-            showclosedate: "m",
-            entryfee: "n",
-            registrationlink: "o",
-            applicationversion: "p",
-            feestructure: "q",
-            maxprice: "r",
-            showfee: "s",
-            location: "t",
-         },
-      },
       appsettings: {
          name: "AppSettings",
          type: "standard",
@@ -112,14 +60,6 @@ function getCFETables() {
          type: "pivot",
          headers: 1,
          summary: "none",
-         schema: {
-            cfeclosedate: "a",
-            id: "b",
-            name: "c",
-            maxentries: "d",
-            entryfee: "e",
-            imagefolderid: "f",
-         },
       },
       payments: {
          name: "Payments",
@@ -193,35 +133,7 @@ function getCFETables() {
  * @returns {object} Show object
  */
 function getShow(id) {
-   // connect to file and open sheet
-   const cfeTables = getCFETables()
-   const data = getAllShows()
-   const cfeConfigSchema = cfeTables.config.schema
-   let show = {}
-
-   for (let d of data) {
-      if (d[cfeConfigSchema.showid.colToIndex()] === id) {
-         show.id = d[cfeConfigSchema.showid.colToIndex()]
-         show.name = d[cfeConfigSchema.exhibitname.colToIndex()]
-         show.openDate = d[cfeConfigSchema.cfeopendate.colToIndex()]
-         show.closeDate = d[cfeConfigSchema.cfeclosedate.colToIndex()]
-         show.maxEntriesPerArtist =
-            d[cfeConfigSchema.maxentriesperartist.colToIndex()]
-         show.maxEntriesPerShow =
-            d[cfeConfigSchema.maxentriespershow.colToIndex()]
-         show.imageFolderId = d[cfeConfigSchema.imagefolderid.colToIndex()]
-         show.allowNFS = d[cfeConfigSchema.allownfs.colToIndex()]
-         show.payFeeOnly = d[cfeConfigSchema.payfeeonly.colToIndex()]
-         show.purchaseLimit = d[cfeConfigSchema.purchaselimit.colToIndex()]
-         show.showopen = d[cfeConfigSchema.showopendate.colToIndex()]
-         show.showclose = d[cfeConfigSchema.showclosedate.colToIndex()]
-         show.entryfee = d[cfeConfigSchema.entryfee.colToIndex()]
-         show.registrationLink =
-            d[cfeConfigSchema.registrationlink.colToIndex()]
-         show.showfee = d[cfeConfigSchema.showfee.colToIndex()]
-      }
-   }
-   return show
+   return MRAACommon.getExhibitConfigById(id)
 }
 
 /**
@@ -229,9 +141,9 @@ function getShow(id) {
  * @param {string} id Unique show identifier
  * @returns {string} Show name
  */
-function getShowName(id) {
-   return getShow(id).name
-}
+// function getShowName(id) {
+//    return getShow(id).exhibittitle
+// }
 
 /**
  * Get all current show identifiers
@@ -247,82 +159,78 @@ function getAllShowIds() {
  * @param {string} id Unique show identifier
  * @returns {number} Max entries
  */
-function getMaxEntriesPerShow(id) {
-   // Ensure a number is returned if missing
-   let max = 0
-   const show = getShow(id)
-   const maxEntriesPerShow = show.maxEntriesPerShow
-   if (maxEntriesPerShow) {
-      max = parseInt(maxEntriesPerShow)
-   }
-   return max
-}
+// function getMaxEntriesPerShow(id) {
+//    // Ensure a number is returned if missing
+//    let max = 0
+//    const show = getShow(id)
+//    const maxEntriesPerShow = show.maxEntriesPerShow
+//    if (maxEntriesPerShow) {
+//       max = parseInt(maxEntriesPerShow)
+//    }
+//    return max
+// }
 
 /**
  * Get maximum entries allowed per artist
  * @param {string} id Unique show identifier
  * @returns {number} Max artist entries
  */
-function getMaxEntriesPerArtist(id) {
-   const show = getShow(id)
-   return show.maxEntriesPerArtist
-}
+// function getMaxEntriesPerArtist(id) {
+//    const show = getShow(id)
+//    return show.maxEntriesPerArtist
+// }
 
 /**
  * Get Pay Fee Only setting for requested show
  * @param {string} id Unique show identifier
  * @returns {boolean} yes/no
  */
-function getPayFeeOnly(id) {
-   return getShow(id).payFeeOnly
-}
+// function getPayFeeOnly(id) {
+//    return getShow(id).payFeeOnly
+// }
 
 /**
  * Get a list of all open shows
  * @returns {array} a list of all open shows
  */
+// replaced with MRAACommon.getOpenCalls()
 function getAllOpenShows() {
-   const cfeTables = getCFETables()
-   const cfeConfigSchema = cfeTables.config.schema
-   // schema defines fields by column letter, need to convert to a zero based integer for array access
-   const statusPos = cfeConfigSchema.status.colToIndex()
-   const data = getAllShows()
-   return data.filter((d) => d[statusPos] === "OPEN")
-}
-
-function getAllShows() {
-   const cfeTables = getCFETables()
-   const cfeConfig = connect(CFE_ID).getSheetByName(cfeTables.config.name)
-   const headers = cfeTables.config.headers
-   const startRow = headers + 1
-   const startCol = 1
-   const data = cfeConfig
-      .getRange(
-         startRow,
-         startCol,
-         cfeConfig.getLastRow() - headers,
-         cfeConfig.getLastColumn()
-      )
-      .getDisplayValues()
-
-   return data
+   return MRAACommon.getOpenCalls()
 }
 
 /**
+ * Get a list of all shows regardless of status
  *
- * @param {string} name the name of a show
- * @returns {string} show id
+ * @returns {array} a list of all shows objects
  */
-function getShowIdByName(name) {
-   const cfeTables = getCFETables()
-   const cfeConfigSchema = cfeTables.config.schema
-   // schema defines fields by column letter, need to convert to a zero based integer for array access
-   const namePos = cfeConfigSchema.exhibitname.colToIndex()
-   const idPos = cfeConfigSchema.showid.colToIndex()
-   const data = getAllShows()
-   const showId = data.filter((d) => d[namePos] === name)
+function getAllShows() {
+   const cfeTableMetadata = MRAACommon.getCFEConfigMetadata()
+   const cfeConfigTable = MRAACommon.connect(CFE_ID).getSheetByName(
+      cfeTableMetadata.name
+   )
+   const headers = cfeTableMetadata.headers
+   const schema = MRAACommon.buildTableSchema(cfeConfigTable, headers)
+   const startRow = headers + 1
+   const startCol = 1
+   const data = cfeConfigTable.getSheetValues(
+      startRow,
+      startCol,
+      cfeConfigTable.getLastRow() - headers,
+      cfeConfigTable.getLastColumn()
+   )
 
-   return showId[0][idPos]
+   // return array of objects
+   let exhibits = []
+   for (let row = 0; row < data.length; row++) {
+      let exhibit = {}
+      for (let key in schema) {
+         let fldPos = schema[key] - 1
+         exhibit[key] = data[row][fldPos]
+      }
+      exhibits.push(exhibit)
+   }
+
+   return exhibits
 }
 
 /**
@@ -332,7 +240,7 @@ function getShowIdByName(name) {
  */
 function getTotalByEvent(id) {
    const cfeTables = getCFETables()
-   const cfeTitleCounts = connect(CFE_ID).getSheetByName(
+   const cfeTitleCounts = MRAACommon.connect(CFE_ID).getSheetByName(
       cfeTables.countsbytitle.name
    )
    const cfeTitleCountsSchema = cfeTables.countsbytitle.schema
@@ -365,7 +273,7 @@ function getTotalByEvent(id) {
  */
 function getTotalByEventArtist(evtTitle, email) {
    const cfeTables = getCFETables()
-   const cfeTitleCounts = connect(CFE_ID).getSheetByName(
+   const cfeTitleCounts = MRAACommon.connect(CFE_ID).getSheetByName(
       cfeTables.countsbytitleartist.name
    )
    const cfeTitleCountsSchema = cfeTables.countsbytitleartist.schema
@@ -397,18 +305,24 @@ function getTotalByEventArtist(evtTitle, email) {
 }
 
 /**
- * Get shows that are currently calling for entries
+ * Get exhibits that are currently calling for entries or the call is closed but the show is still open.
+ * This reads entries in the Exhibit table which are all the entries made by artists for a show.
+ * The entries remain in the Exhibit table until the show is closed.
+ *
+ * @returns {array} The exhibit titles for all current calls for entries and open shows
  */
 function getCurrentCalls() {
-   const cfeTables = getCFETables()
-   const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
-   const cfeExhibitsSchema = cfeTables.exhibits.schema
-   const headers = cfeTables.exhibits.headers
+   const cfeExhibitsMetadata = MRAACommon.getCFEExhibitsMetadata()
+   const headers = cfeExhibitsMetadata.headers
+   const cfeExhibits = MRAACommon.connect(CFE_ID).getSheetByName(
+      cfeExhibitsMetadata.name
+   )
+   const cfeExhibitsSchema = MRAACommon.buildTableSchema(cfeExhibits, headers)
    const startRow = headers + 1
-   const startCol = cfeExhibitsSchema.eventtitle.colToIndex() + 1
-   const data = cfeExhibits
-      .getRange(startRow, startCol, cfeExhibits.getLastRow() - headers, 1)
-      .getDisplayValues()
+   const startCol = cfeExhibitsSchema.exhibittitle
+   const endRow = cfeExhibits.getLastRow() - headers
+   const endCol = startCol
+   const data = cfeExhibits.getSheetValues(startRow, startCol, endRow, endCol)
 
    const filteredData = data.map((d) => d[0])
    const uniqueEvents = [...new Set(filteredData)]
@@ -418,7 +332,7 @@ function getCurrentCalls() {
 
 function getCurrentCallsUploads() {
    const cfeTables = getCFETables()
-   const cfeCountsById = connect(CFE_ID).getSheetByName(
+   const cfeCountsById = MRAACommon.connect(CFE_ID).getSheetByName(
       cfeTables.countsbyid.name
    )
    const cfeCountsByIdSchema = cfeTables.countsbyid.schema
@@ -456,7 +370,9 @@ function getCurrentCallsUploads() {
  */
 function getSubmissionsById(id) {
    const cfeTables = getCFETables()
-   const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+   const cfeExhibits = MRAACommon.connect(CFE_ID).getSheetByName(
+      cfeTables.exhibits.name
+   )
    const cfeExhibitsSchema = cfeTables.exhibits.schema
    const startRow = cfeTables.exhibits.headers + 1
    const startCol = 1
@@ -482,7 +398,9 @@ function getSubmissionsById(id) {
  */
 function getUploadsByArtist(evtTitle, email) {
    const cfeTables = getCFETables()
-   const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+   const cfeExhibits = MRAACommon.connect(CFE_ID).getSheetByName(
+      cfeTables.exhibits.name
+   )
    const cfeExhibitsSchema = cfeTables.exhibits.schema
    const startRow = cfeTables.exhibits.headers + 1
    const startCol = 1
@@ -517,7 +435,9 @@ function getUploadsByArtist(evtTitle, email) {
  */
 function getUploadsByIdByArtist(id, email) {
    const cfeTables = getCFETables()
-   const cfeExhibits = connect(CFE_ID).getSheetByName(cfeTables.exhibits.name)
+   const cfeExhibits = MRAACommon.connect(CFE_ID).getSheetByName(
+      cfeTables.exhibits.name
+   )
    const cfeExhibitsSchema = cfeTables.exhibits.schema
    const startRow = cfeTables.exhibits.headers + 1
    const startCol = 1
@@ -542,7 +462,7 @@ function getUploadsByIdByArtist(id, email) {
 
 function getEventArtistEntries() {
    const cfeTables = getCFETables()
-   const cfeEntries = connect(CFE_ID).getSheetByName(
+   const cfeEntries = MRAACommon.connect(CFE_ID).getSheetByName(
       cfeTables.countsbytitleartist.name
    )
    const cfeCountsSchema = cfeTables.countsbytitleartist.schema
@@ -595,9 +515,9 @@ function getFee(id) {
  */
 function getExhibitPaymentsDashboard() {
    const cfeTables = getCFETables()
-   const cfePaymentDashboard = connect(CFE_ID).getSheetByName(
-      cfeTables.paymentdashboard.name
-   )
+   const cfePaymentDashboard = MRAACommon.MRAACommon.connect(
+      CFE_ID
+   ).getSheetByName(cfeTables.paymentdashboard.name)
    const cfePDPivotTables = cfeTables.paymentdashboard.pivottables
    const cfeTBENPivotTable = cfePDPivotTables.totalsbyexhibitname
    const cfeTBENSchema = cfePDPivotTables.totalsbyexhibitname.schema // schema for totalsbyexhibitname pivot table

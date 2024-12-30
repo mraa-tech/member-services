@@ -1,8 +1,16 @@
 {
   "timeZone": "America/New_York",
-  "dependencies": {},
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "MRAACommon",
+        "libraryId": "1upLmjjJDRdwVwzr91tLpdA9ouZuNMn_X1AvP_MtiSunmWcxMXNC6lEkA",
+        "version": "5"
+      }
+    ]
+  },
   "webapp": {
     "executeAs": "USER_DEPLOYING",
     "access": "ANYONE_ANONYMOUS"
