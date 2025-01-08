@@ -42,10 +42,11 @@
                 <h1>MRAA Member Services Dashboard</h1>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div>
                             <div class="dashboard-box">
+
                                 <div id="memberCount" class="dashboard-counter">
                                     <div
                                         id="memberCountLoading"
@@ -61,9 +62,14 @@
                                 <div class="fw-bold text-center">
                                     Total<br />Members
                                 </div>
+
                             </div>
                         </div>
-                        <div class="col-md-4">
+
+
+                    </div>
+                    <div class="row">
+                        <div>
                             <div class="dashboard-box">
                                 <div
                                     id="exhibitingMemberCount"
@@ -85,29 +91,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 dashboard-list">
-                            <ul class="list-group">
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-content-center"
-                                >
-                                    Pending <span id="pendingCount">?</span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-content-center"
-                                >
-                                    Associate Members <span id="associateCount">?</span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-content-center"
-                                >
-                                    Dues Paid <span id="duesPaid">?</span>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
+                    <div class="row">
+                        <div>
+                            <div class="dashboard-box">
 
+                                <div id="associateCount" class="dashboard-counter">
+                                    <div
+                                        id="associateCountLoading"
+                                        class="loadingio-spinner-bars-949i7xv6frh"
+                                    >
+                                        <div class="ldio-mtht8bi3gy">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fw-bold text-center">
+                                    Associate<br />Members
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-8">
                     <h2>Services</h2>
                     <div class="list-group">
                         <a
@@ -132,8 +144,9 @@
                             <div class="loading" id="artistpershowhistory"><span id="loadingartistspershow">Loading ...</span></div>
                         </div>
                     </div>
-                </div>
             </div>
+
+
         </div>
 
         <script src="scripts/main.js?v=2"></script>
