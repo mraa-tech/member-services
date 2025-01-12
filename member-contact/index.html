@@ -1,54 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta http-equiv="refresh" content="3600; url=index.html">
-        <title>MRAA Member Services - Email List</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-            crossorigin="anonymous"
-        />
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         rel="stylesheet"
+         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
 
-        <link rel="stylesheet" href="../css/dashboard.css" />
-        <link rel="stylesheet" href="../css/pages.css" />
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-    </head>
+      <link
+         href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600&display=swap"
+         rel="stylesheet" />
 
-    <body>
-        <div class="container mraa-container">
-            <div class="dashboard-hdr">
-                <h1>MRAA Member Services Dashboard</h1>
+      <link
+         href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap"
+         rel="stylesheet" />
+      <meta http-equiv="refresh" content="3600; url=index.html" />
+      <title>MRAA Member Services - Email List</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+      <!-- Move to a cental source -->
+      <!-- <link rel="stylesheet" href="../css/dashboard.css" />
+        <link rel="stylesheet" href="../css/pages.css" /> -->
+      <link
+         rel="stylesheet"
+         href="https://mraa-tech.github.io/web-common/css/main.css?v=2" />
+      <link
+         rel="apple-touch-icon"
+         sizes="180x180"
+         href="/apple-touch-icon.png" />
+      <link
+         rel="icon"
+         type="image/png"
+         sizes="32x32"
+         href="/favicon-32x32.png" />
+      <link
+         rel="icon"
+         type="image/png"
+         sizes="16x16"
+         href="/favicon-16x16.png" />
+      <link rel="manifest" href="/site.webmanifest" />
+      
+   </head>
+
+   <body>
+      <div class="container mraa-container">
+         <header>
+            <div id="banner" class="banner">
+               <div id="logo fs-2">
+                  <a href="https://www.metrorichmondart.org">MRAA</a>
+                  <span class="text-right" id="supportcontact"></span>
+               </div>
+               <div id="title">
+                  <span class="bold fs-3">Member Services </span>
+                  <span class="light fs-6">Member Contact Dashboard</span><br />
+               </div>
             </div>
-            <nav
-                class="navbar navbar-expand-lg navbar-light bg-light mb-2"
-                style="padding-left: 15px"
-            >
-                <a class="navbar-brand" href="#">MRAA Tech</a>
-                <button
+         </header>
+         <nav
+            class="navbar navbar-expand-lg navbar-light bg-light mb-2"
+            style="padding-left: 15px">
+            <a class="navbar-brand" href="#">MRAA Tech</a>
+            <!-- <button
                     class="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -58,24 +75,129 @@
                     aria-label="Toggle navigation"
                 >
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link" href=".."
-                            >Home <span class="sr-only">(current)</span></a
-                        >
-                    </div>
-                </div>
-            </nav>
+                </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+               <div class="navbar-nav">
+                  <a class="nav-link" href=".."
+                     >Member Services Home <span class="sr-only"></span
+                  ></a>
+               </div>
+            </div>
+         </nav>
 
-            <h1>Active Member Email List</h1>
-            <div class="mt-2 ml-2">
+         <h2 class="mt-2 fs-2">Active Member Email List</h2>
+         <form action="#" id="form-login" class="needs-validation" novalidate>
+            <div id="login">
+               <div class="header">
+                  <span class="material-symbols-outlined icon">
+                     person_pin
+                  </span>
+                  <span class="text">Board Member Login</span>
+               </div>
+               <div class="row g-3 mt-2 mb-2">
+                  <div class="col-auto col-form-label">
+                     <label for="board-member-email">Email Address</label>
+                  </div>
+                  <div class="col-sm-6">
+                     <input
+                        type="email"
+                        class="form-control"
+                        id="board-member-email"
+                        placeholder="email@example.com"
+                        required />
+                     <div id="emailMsg" class="invalid-feedback fs-6">
+                        Must enter a valid email address
+                     </div>
+                  </div>
+               </div>
+                <div class="row g-3 mt-2 mb-2">
+                  <div class="col-auto col-form-label">
+                     <label for="board-member-token">Security Token</label>
+                  </div>
+                  <div class="col-auto">
+                     <input
+                        type="password"
+                        class="form-control"
+                        id="board-member-token"
+                        placeholder="token"
+                        required />
+                     <div id="tokenMsg" class="invalid-feedback fs-6">
+                        Must enter a valid token
+                     </div>
+                  </div>
+                  <div class="col-auto"><a href="">Request Token</a></div>
+               <div>
+                  <button
+                     type="submit"
+                     class="btn btn-primary mb-3 mt-3"
+                     id="login-button">
+                     Login
+                  </button>
+               </div>
+               <div class="mb-2">
+                  <div id="fetching-board-member" class="fetching d-none">
+                     <div class="animation line-up">
+                        Fetching data, Please Wait ...
+                     </div>
+                  </div>
+                  <!-- <div id="artist-detail" class="d-none container">
+                     <div class="row border-bottom">
+                        <div class="col-3 col-sm-2 label">Member</div>
+                        <div class="col-12 col-sm-3" id="artist-name"></div>
+                        <div class="col-12 col-sm-2" id="artist-phone"></div>
+                     </div>
+                     <div class="row">
+                        <div class="col-4 col-sm-2 label">Status</div>
+                        <div class="col-8 col-sm-10">
+                           <div id="valid-member" class="d-none">
+                              <span class="valid-member"
+                                 >Exhibiting Member</span
+                              >
+                              <span
+                                 class="material-symbols-outlined valid-member small-icon">
+                                 done
+                              </span>
+                           </div>
+                           <div id="not-exhibiting-member" class="d-none">
+                              <span class="invalid-member"
+                                 >Not an Exhibiting Member</span
+                              >
+                              <span
+                                 class="material-symbols-outlined invalid-member small-icon">
+                                 close
+                              </span>
+                           </div>
+                           <div id="not-active-member" class="d-none">
+                              <span class="invalid-member"
+                                 >Not an Active Member</span
+                              >
+                              <span
+                                 class="material-symbols-outlined invalid-member small-icon">
+                                 close
+                              </span>
+                           </div>
+                           <div id="invalid-member" class="d-none">
+                              <span class="invalid-member"
+                                 >Not an MRAA member email address</span
+                              >
+                              <span
+                                 class="material-symbols-outlined invalid-member small-icon">
+                                 close
+                              </span>
+                           </div>
+                        </div>
+                     </div>
+                  </div> -->
+               </div>
+            </div>
+         </form>
+         <!-- <div class="mt-2 ml-2">
                 <button id="btnGetEmails" class="btn btn-primary mr-2">
                     Get Emails
                 </button>
                 <span id="msg"></span>
-            </div>
-            <div class="content mt-2">
+            </div> -->
+         <!-- <div class="content mt-2">
                 <table id="emailTable" class="table table-striped">
                     <tr>
                         <td colspan="4">
@@ -93,19 +215,23 @@
                         </td>
                     </tr>
                 </table>
+            </div> -->
+         <footer class="footer">
+            <div id="footer" class="footer mt-3">
+               Metropolitan Richmond Artists Association |
+               <span id="copyright">Copyright &copy;</span>
+               <span id="year"></span>
             </div>
-        </div>
-        <script src="app.js?v=0.5"></script>
+         </footer>
+      </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-            crossorigin="anonymous"
-        ></script>
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip();
-            });
-        </script>
-    </body>
+      <script src="https://mraa-tech.github.io/web-common/scripts/main.js?v=0.1"></script>
+      <script src="./app.js?v=3"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <!-- <script>
+         $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+         })
+      </script> -->
+   </body>
 </html>
