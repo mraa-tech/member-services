@@ -1,7 +1,5 @@
 const EP_MEMBER_CONTACT =
    "https://script.google.com/macros/s/AKfycbzpdfWIf8ITDLupFLBF_V2K43EHsJfiwD252aSHBFfNvbtzGQ0gdfBP2RDZd-1lK0hbAg/exec"
-const EP_MEMBER_CONTACT_TEST =
-   "https://script.google.com/macros/s/AKfycbzpdfWIf8ITDLupFLBF_V2K43EHsJfiwD252aSHBFfNvbtzGQ0gdfBP2RDZd-1lK0hbAg/exec?path=validateaccess&email=jamesgreen.311@gmail.com&token=CA595D59"
 
 function validateAccessPost() {
    const formData = new FormData()
@@ -30,6 +28,7 @@ function validateAccessGet(e) {
    const token = document.getElementById("board-member-token").value
    const url =
       EP_MEMBER_CONTACT + `?path=validateaccess&email=${email}&token=${token}`
+
    if (email !== "") {
       document
          .getElementById("fetching-board-member")
@@ -42,22 +41,8 @@ function validateAccessGet(e) {
    }
 }
 
-function getEmailList() {
-   // EndPoint source -> MRAA Critique List version 8, TODO move to MRAA Member Services
-   const url = ""
-   let msg = document.getElementById("msg")
-   msg.innerHTML = "Fetching, Please wait ..."
-
-   fetch(url)
-      .then((d) => d.json())
-      .then((d) => {
-         showList(d)
-      })
-}
-
 function showResult(d) {
    document.getElementById("fetching-board-member").classList.add("d-none")
-   //document.getElementById("login").classList.add("d-none")
    const msg = document.getElementById("result-msg")
    const status = document.getElementById("status-msg")
    if (d.params.boardmember === "true") {
@@ -71,59 +56,32 @@ function showResult(d) {
       status.innerHTML += `, does not have a valid token`
    }
    if (d.status === "SUCCESS") {
-      msg.innerHTML += `, ${d.vals}`
+      showList(d.vals)
    } else {
       status.innerHTML += `, ${d.msg}`
    }
 }
 
 function showList(arr) {
-   const activeMemberStatus = ["active", "pending"]
+   document.getElementById("form-login").classList.add("d-none")
    const table = document.getElementById("emailTable")
+   const emailList = document.getElementById("emailList")
    const btnCopy = document.getElementById("btnCopy")
-   const btnGetEmails = document.getElementById("btnGetEmails")
    let msg = document.getElementById("msg")
 
    let count = 0
    arr.forEach((el) => {
-      // validate good data
-      if (activeMemberStatus.includes(el.status)) {
-         let row = table.insertRow(-1)
-         row.insertCell(0).innerHTML = el.status
-         row.insertCell(0).innerHTML = el.email
-         row.insertCell(0).innerHTML = el.firstname
-         row.insertCell(0).innerHTML = el.lastname
-         count += 1
-      }
+      let row = table.insertRow(-1)
+      row.insertCell(0).innerHTML = el[2]
+      row.insertCell(0).innerHTML = el[1]
+      row.insertCell(0).innerHTML = el[0]
+      //row.insertCell(0).innerHTML = el.lastname
+      count += 1
    })
 
-   // let row = table.insertRow(-1);
-   // row.insertCell(0).innerHTML = `Total: ${count}`;
-   // row.insertCell(0).innerHTML = "";
-   // row.insertCell(0).innerHTML = "";
-   // row.insertCell(0).innerHTML = "";
    msg.innerHTML = ""
    btnCopy.disabled = false
-   btnGetEmails.disabled = true
-}
-
-// A test run for adding a new row
-function addRow() {
-   // endpoint source -> MRAA Critique List version 7
-   const url =
-      "https://script.google.com/macros/s/AKfycbw7LsL3ASCbX82jmKa0K1_P66Lz8mBTqh5LLJbpxktF4GR4shm8qBLYig/exec"
-   fetch(url, {
-      method: "POST",
-      cache: "no-cache",
-      mode: "no-cors",
-      headers: {
-         ContentType: "application/json",
-      },
-      redirect: "follow",
-      body: JSON.stringify({
-         name: "Jon",
-      }), //test
-   })
+   emailList.classList.remove("d-none")
 }
 
 function copyToClipboard() {
@@ -134,8 +92,8 @@ function copyToClipboard() {
    textarea.setAttribute("readonly", "")
    textarea.style.position = "absolute"
    textarea.style.left = "-9999px"
-   // start loop at 1 to skip header row
-   for (i = 1; i < rows.length; i++) {
+   // start loop at 2 to skip header row
+   for (i = 2; i < rows.length; i++) {
       textarea.value += `${rows[i].cells[2].textContent},`
    }
    document.body.appendChild(textarea)
@@ -146,17 +104,18 @@ function copyToClipboard() {
 }
 
 // From bootstrap.com
-;(() => {
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+;(function () {
    "use strict"
 
    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-   const forms = document.querySelectorAll(".needs-validation")
+   var forms = document.querySelectorAll(".needs-validation")
 
    // Loop over them and prevent submission
-   Array.from(forms).forEach((form) => {
+   Array.prototype.slice.call(forms).forEach(function (form) {
       form.addEventListener(
          "submit",
-         (event) => {
+         function (event) {
             if (!form.checkValidity()) {
                event.preventDefault()
                event.stopPropagation()
@@ -171,7 +130,6 @@ function copyToClipboard() {
 
 document.addEventListener("DOMContentLoaded", showYear)
 document
-   .getElementById("login-button")
-   .addEventListener("click", validateAccessGet)
-//document.getElementById("btnGetEmails").addEventListener("click", getEmailList);
-//document.getElementById("btnCopy").addEventListener("click", copyToClipboard);
+   .getElementById("form-login")
+   .addEventListener("submit", validateAccessGet)
+document.getElementById("btnCopy").addEventListener("click", copyToClipboard)
