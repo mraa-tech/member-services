@@ -49,27 +49,27 @@ function fetchTotalAssociateMembers() {
         .catch()
 }
 
-function fetchTotalPendingMembers() {
-    const url = EP_MEMBERS_SERVICES + "totalpendingmembers"
-    fetch(url)
-    .then(resp => resp.json())
-    .then(resp => {
-        t = resp
-        showTotalPendingMembers(t)
-    })
-    .catch()
-}
+// function fetchTotalPendingMembers() {
+//     const url = EP_MEMBERS_SERVICES + "totalpendingmembers"
+//     fetch(url)
+//     .then(resp => resp.json())
+//     .then(resp => {
+//         t = resp
+//         showTotalPendingMembers(t)
+//     })
+//     .catch()
+// }
 
-function fetchTotalDuesPaid() {
-    const url = EP_MEMBERS_SERVICES + "totalduespaid"
-    fetch(url)
-    .then(resp => resp.json())
-    .then(resp => {
-        t = resp
-        showTotalDuesPaid(t)
-    })
-    .catch()
-}
+// function fetchTotalDuesPaid() {
+//     const url = EP_MEMBERS_SERVICES + "totalduespaid"
+//     fetch(url)
+//     .then(resp => resp.json())
+//     .then(resp => {
+//         t = resp
+//         showTotalDuesPaid(t)
+//     })
+//     .catch()
+// }
 
 function fetchCurrentExhibitions() {
     const yr = new Date().getFullYear()
@@ -101,14 +101,14 @@ function fetchArtistsPerShowHistory() {
     }))
 }
 
-function fetchExhibitPayments() {
-   const url = EP_MEMBERS_SERVICES + "exhibitpayments"
-   fetch(url).then((resp) =>
-      resp.json().then((resp) => {
-         showExhibitPayments(resp)
-      })
-   )
-}
+// function fetchExhibitPayments() {
+//    const url = EP_MEMBERS_SERVICES + "exhibitpayments"
+//    fetch(url).then((resp) =>
+//       resp.json().then((resp) => {
+//          showExhibitPayments(resp)
+//       })
+//    )
+// }
 
 // function fetchEventArtistEntries() {
 //     const url = EP_MEMBERS_SERVICES + "eventartistentries"
@@ -122,9 +122,9 @@ function fetchExhibitPayments() {
 function fetchMemberCounts() {
    fetchTotalMembers()
    fetchTotalExhibitingMembers()
-   fetchTotalPendingMembers()
+   //fetchTotalPendingMembers()
    fetchTotalAssociateMembers()
-   fetchTotalDuesPaid()
+   // fetchTotalDuesPaid()
 }
 
 function showTotalMembers(t) {
@@ -141,10 +141,10 @@ function showTotalExhibitingMembers(t) {
    ele.append(t)
 }
 
-function showTotalPendingMembers(t) {
-   let ele = document.getElementById("pendingCount")
-   ele.innerText = t
-}
+// function showTotalPendingMembers(t) {
+//    let ele = document.getElementById("pendingCount")
+//    ele.innerText = t
+// }
 
 function showTotalAssociateMembers(t) {
    let ele = document.getElementById("associateCount")
@@ -161,8 +161,11 @@ function showTotalDuesPaid(t) {
 
 function showYear() {
    const yr = new Date().getFullYear()
-   const ele = document.getElementById("yr")
-   ele.innerText = yr
+   const yr1 = document.getElementById("year")
+   const yr2 = document.getElementById("ccfe-yr")
+   yr1.innerText = yr
+   yr2.innerText = yr
+
 }
 
 function showCurrentCallsUploads(arr) {
@@ -255,49 +258,36 @@ function showArtistsPerShowHistory(arr) {
     }
 }
 
-function showExhibitPayments(arr) {
-   const ele = document.getElementById("exhibitpayments")
-   document.getElementById("loadingexhibitpayments").remove()
-   const schema = {
-      Exhibit: 0,
-      Artist: 1,
-      "Amount Paid": 2,
-   }
-   if (arr.length <= 0) {
-      ele.innerHTML = "No payments"
-   } else {
-      //build table
-      const table = document.createElement("table")
-      //create headers
-      //   const headers = Object.keys(schema)
-      //   const thead = document.createElement("thead")
-      //   const hrow = document.createElement("tr")
-      //   headers.forEach((h) => {
-      //      let hdr = document.createElement("th")
-      //      hdr.innerText = h
-      //      hrow.append(hdr)
-      //   })
-      //   thead.append(hrow)
-      //   table.append(thead)
-      //create body
-      const tbody = document.createElement("tbody")
-      arr.forEach((r) => {
-         let brow = document.createElement("tr")
-         r.forEach((c) => {
-            let cell = document.createElement("td")
-            if (c === "" || c === "$0") {
-               cell.classList.add("text-danger")
-            }
-            cell.innerText = c
-            brow.append(cell)
-         })
-         tbody.append(brow)
-      })
-      table.append(tbody)
-      ele.append(table)
-      table.classList.add("table", "table-striped")
-   }
-}
+// function showExhibitPayments(arr) {
+//    const ele = document.getElementById("exhibitpayments")
+//    document.getElementById("loadingexhibitpayments").remove()
+//    const schema = {
+//       Exhibit: 0,
+//       Artist: 1,
+//       "Amount Paid": 2,
+//    }
+//    if (arr.length <= 0) {
+//       ele.innerHTML = "No payments"
+//    } else {
+//       const table = document.createElement("table")
+//       const tbody = document.createElement("tbody")
+//       arr.forEach((r) => {
+//          let brow = document.createElement("tr")
+//          r.forEach((c) => {
+//             let cell = document.createElement("td")
+//             if (c === "" || c === "$0") {
+//                cell.classList.add("text-danger")
+//             }
+//             cell.innerText = c
+//             brow.append(cell)
+//          })
+//          tbody.append(brow)
+//       })
+//       table.append(tbody)
+//       ele.append(table)
+//       table.classList.add("table", "table-striped")
+//    }
+// }
 
 function showEventArtistEntries(arr) {
     const ele = document.getElementById("entriesamountdue")
@@ -364,5 +354,5 @@ document.addEventListener("DOMContentLoaded", fetchMemberCounts)
 document.addEventListener("DOMContentLoaded", showYear)
 document.addEventListener("DOMContentLoaded", fetchCurrentCallsUploads)
 document.addEventListener("DOMContentLoaded", fetchArtistsPerShowHistory)
-document.addEventListener("DOMContentLoaded", fetchExhibitPayments)
+//document.addEventListener("DOMContentLoaded", fetchExhibitPayments)
 //document.addEventListener("DOMContentLoaded", fetchEventArtistEntries)
