@@ -1,10 +1,11 @@
+// mraa-member-contact-list-api
 const EP_MEMBER_CONTACT =
    "https://script.google.com/macros/s/AKfycbzpdfWIf8ITDLupFLBF_V2K43EHsJfiwD252aSHBFfNvbtzGQ0gdfBP2RDZd-1lK0hbAg/exec"
 
 function validateAccessPost() {
    const formData = new FormData()
    formData.append("email", "jamesgreen.311@gmail.com")
-   formData.append("token", "CA595D59")
+   formData.append("token", "CA595D59") // testing token, will be diabled after testing
 
    const options = {
       method: "POST",
